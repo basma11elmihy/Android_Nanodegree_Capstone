@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Capstone</string>
+    <string name="api_key">704309e018dc5823efbc0ca4966083d1</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="movie_details_base_url">https://api.themoviedb.org/3/movie/</string>
+    <string name="movie_details_api_url">"?api_key=704309e018dc5823efbc0ca4966083d1"</string>
+    <string name="image_url">/images</string>
+    <string name="video_url">/videos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
