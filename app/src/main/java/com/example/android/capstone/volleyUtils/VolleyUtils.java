@@ -143,6 +143,26 @@ public class VolleyUtils {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(request);
     }
+    public void volleyMainSimpleResults(String url, Context context, onMainResponce myResponce, String type) {
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                MultiSearch multiSearch = gson.fromJson(response, MultiSearch.class);
+                list = multiSearch.getResults();
+                myResponce.onMainSuccess(list,multiSearch,type);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                myResponce.onMainFail(error.toString());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+    }
 
 }
 

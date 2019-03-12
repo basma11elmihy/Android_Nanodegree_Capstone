@@ -37,26 +37,24 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
         MovieReviews movieReview = results.get(i);
         TextView textView = viewHolder.body;
         ImageView imageView = viewHolder.moreView;
+        ImageView lessView = viewHolder.lessView;
 
         viewHolder.author.setText(movieReview.getAuthor());
         viewHolder.body.setText(movieReview.getContent());
         imageView.setImageResource(R.drawable.ic_expand_more_black_24dp);
+        lessView.setImageResource(R.drawable.ic_expand_less_black_24dp);
 
         int maxLines = 3;
 
         textView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                moreClicked = false;
                 textView.getViewTreeObserver().removeOnPreDrawListener(this);
-                if (!moreClicked) {
                     if (textView.getLineCount() > maxLines) {
                         imageView.setVisibility(View.VISIBLE);
                         textView.setMaxLines(maxLines);
 
                     }
-                    moreClicked = true;
-                }
                 return true;
             }
         });
@@ -64,15 +62,17 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (moreClicked) {
-                    imageView.setImageResource(R.drawable.ic_expand_less_black_24dp);
-                    textView.setMaxLines(textView.getLineCount());
-                    moreClicked = false;
-                } else {
-                    imageView.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                    textView.setMaxLines(maxLines);
-                    moreClicked = true;
-                }
+                imageView.setVisibility(View.GONE);
+                lessView.setVisibility(View.VISIBLE);
+                textView.setMaxLines(textView.getLineCount());
+            }
+        });
+        lessView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lessView.setVisibility(View.GONE);
+                imageView.setVisibility(View.VISIBLE);
+                textView.setMaxLines(maxLines);
             }
         });
     }
@@ -89,11 +89,13 @@ public class MovieReviewAdapter extends RecyclerView.Adapter<MovieReviewAdapter.
         private TextView author;
         private TextView body;
         private ImageView moreView;
+        private ImageView lessView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             author = itemView.findViewById(R.id.movie_review_author);
             body = itemView.findViewById(R.id.movie_review_body);
             moreView = itemView.findViewById(R.id.movie_review_more);
+            lessView = itemView.findViewById(R.id.movie_review_less);
         }
     }
 }

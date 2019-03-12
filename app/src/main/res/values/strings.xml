@@ -13,5 +13,14 @@
     <string name="overview">Overview</string>
     <string name="this_is_the_overview">this is the overview</string>
     <string name="cast_list">Cast List</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="latest">Latest</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular_url">"https://api.themoviedb.org/3/movie/popular?api_key=704309e018dc5823efbc0ca4966083d1"</string>
+    <string name="nowPlaying_url">https://api.themoviedb.org/3/movie/now_playing?api_key=704309e018dc5823efbc0ca4966083d1</string>
+    <string name="top_rated_url">https://api.themoviedb.org/3/movie/top_rated?api_key=704309e018dc5823efbc0ca4966083d1</string>
+    <string name="see_all">SEE ALL</string>
 
 </resources>

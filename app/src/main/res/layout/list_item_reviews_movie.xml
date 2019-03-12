@@ -29,12 +29,22 @@
 
         <ImageView
             android:id="@+id/movie_review_more"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
             android:background="@color/colorAccent"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/movie_review_body"
             app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
+        <ImageView
+            android:id="@+id/movie_review_less"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:background="@color/colorAccent"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/movie_review_body"
+            app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
+
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

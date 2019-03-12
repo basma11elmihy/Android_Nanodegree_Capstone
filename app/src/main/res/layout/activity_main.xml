@@ -1,21 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <include
+        android:id="@+id/main_action_layout"
+        layout="@layout/activity_custom_app_compat"/>
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/movie_now_playing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello Main!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <include
-        layout="@layout/activity_custom_app_compat"/>
+        android:text="@string/now_playing"
+        app:layout_constraintTop_toBottomOf="@id/main_action_layout"/>
+    <TextView
+        android:id="@+id/movie_seeall_nowPlaying"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_action_layout"
+        android:text="@string/see_all"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_now_playing_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/movie_now_playing"
+        app:layout_constraintStart_toStartOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/movie_top_rated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_rated"
+        app:layout_constraintTop_toBottomOf="@id/movie_now_playing_rv"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/movie_seeall_topRated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_now_playing_rv"
+        android:text="@string/see_all"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_top_rated_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/movie_top_rated"
+        app:layout_constraintStart_toStartOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/movie_popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/popular"
+        app:layout_constraintTop_toBottomOf="@id/movie_top_rated_rv"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/movie_seeall_popular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_top_rated_rv"
+        android:text="@string/see_all"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_popular_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/movie_popular"
+        app:layout_constraintStart_toStartOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>

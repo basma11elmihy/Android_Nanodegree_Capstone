@@ -30,7 +30,15 @@
        android:visibility="gone"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"/>
-
+    <ImageView
+        android:id="@+id/movie_overview_less"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_expand_less_black_24dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"/>
     <TextView
         android:id="@+id/movie_info_cast_title"
         android:layout_width="wrap_content"

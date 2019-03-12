@@ -6,3 +6,4 @@ public interface onResponce {
     void onSuccess(Object responce, Object mainResponce);
     void onFail(String error);
 }
+
