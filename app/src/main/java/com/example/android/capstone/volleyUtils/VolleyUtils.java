@@ -10,6 +10,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.android.capstone.MovieDetailsActivity;
 import com.example.android.capstone.moviemodel.BelongsToCollection;
+import com.example.android.capstone.moviemodel.CastMain;
 import com.example.android.capstone.moviemodel.MovieDetailsModel;
 import com.example.android.capstone.moviemodel.MoviePosters;
 import com.example.android.capstone.moviemodel.MovieVideo;
@@ -90,6 +91,26 @@ public class VolleyUtils {
                 MovieVideo movieVids = gson.fromJson(response, MovieVideo.class);
                 List list = movieVids.getMovieVideoResults();
                 myResponce.onSuccess(list,movieVids);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                myResponce.onFail(error.toString());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+    }
+    public void volleyCastDetailsResults(String url,Context context, onResponce myResponce){
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                CastMain castMain = gson.fromJson(response, CastMain.class);
+                List list = castMain.getCast();
+                myResponce.onSuccess(list,castMain);
             }
         }, new Response.ErrorListener() {
             @Override

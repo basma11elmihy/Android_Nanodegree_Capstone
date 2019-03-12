@@ -6,8 +6,12 @@
     <string name="movie_details_api_url">"?api_key=704309e018dc5823efbc0ca4966083d1"</string>
     <string name="image_url">/images</string>
     <string name="video_url">/videos</string>
+    <string name="credits_url">/credits</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="overview">Overview</string>
+    <string name="this_is_the_overview">this is the overview</string>
+    <string name="cast_list">Cast List</string>
 
 </resources>

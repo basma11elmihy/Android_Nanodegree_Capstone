@@ -31,7 +31,9 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
     private TextView rateTv;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private NestedScrollView nestedScrollView;
+    private String overView;
+    private MovieViewPagerAdapter viewPagerAdapter;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,25 +56,13 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         rateTv = findViewById(R.id.movie_rate);
         viewPager = findViewById(R.id.movie_pager);
         tabLayout = findViewById(R.id.tab_layout);
-//        nestedScrollView = findViewById(R.id.nested_scrollview);
-//
-//        nestedScrollView.setNestedScrollingEnabled(true);
 
-        Bundle bundle = new Bundle();
+        bundle = new Bundle();
         bundle.putString("extraID",id);
 
 
-        MovieViewPagerAdapter viewPagerAdapter = new MovieViewPagerAdapter(getSupportFragmentManager());
 
-         viewPagerAdapter.addFragment(new MovieInfoFrag(),"Info");
-         MovieImagesVidsFrag imagesVidsFrag = new MovieImagesVidsFrag();
-         imagesVidsFrag.setArguments(bundle);
-         viewPagerAdapter.addFragment(imagesVidsFrag,"Images & Videos");
-         viewPagerAdapter.addFragment(new MovieReviewsFrag(),"Reviews");
-         viewPagerAdapter.addFragment(new MovieSimilarFrag(),"Similar Movies");
-         viewPagerAdapter.addFragment(new MovieRecomFrag(),"Recommendations");
-         viewPager.setAdapter(viewPagerAdapter);
-         tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
@@ -111,6 +101,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             String runTime = String.valueOf(model.getRuntime());
             String year = model.getReleaseDate();
             String rate = String.valueOf(model.getVoteAverage());
+            overView = model.getOverview();
 
             toolbarLayout.setTitle(movieTitle);
             movieTitleTv.setText(movieTitle);
@@ -133,6 +124,24 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
 
             }
 
+
+            viewPagerAdapter = new MovieViewPagerAdapter(getSupportFragmentManager());
+
+            bundle.putString("overview",overView);
+            MovieInfoFrag movieInfoFrag = new MovieInfoFrag();
+            movieInfoFrag.setArguments(bundle);
+            viewPagerAdapter.addFragment(movieInfoFrag,"Info");
+
+            MovieImagesVidsFrag imagesVidsFrag = new MovieImagesVidsFrag();
+            imagesVidsFrag.setArguments(bundle);
+            viewPagerAdapter.addFragment(imagesVidsFrag,"Images & Videos");
+
+
+            viewPagerAdapter.addFragment(new MovieReviewsFrag(),"Reviews");
+            viewPagerAdapter.addFragment(new MovieSimilarFrag(),"Similar Movies");
+            viewPagerAdapter.addFragment(new MovieRecomFrag(),"Recommendations");
+            viewPager.setAdapter(viewPagerAdapter);
+            tabLayout.setupWithViewPager(viewPager);
         }
     }
 

@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieInfoFrag">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MovieInfoFrag"
+   >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/overview_movie_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="@string/overview"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/movie_info_overview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/overview_movie_title"
+        tools:text="@string/this_is_the_overview"/>
+   <ImageView
+       android:id="@+id/movie_overview_more"
+       android:layout_width="30dp"
+       android:layout_height="30dp"
+       android:background="@color/colorAccent"
+       android:src="@drawable/ic_expand_more_black_24dp"
+       android:visibility="gone"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintTop_toBottomOf="@id/movie_info_overview"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/movie_info_cast_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"
+        android:text="@string/cast_list"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/movie_castlist_rv"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/movie_info_cast_title"
+        app:layout_constraintStart_toStartOf="parent">
+    </android.support.v7.widget.RecyclerView>
+
+
+
+</android.support.constraint.ConstraintLayout>

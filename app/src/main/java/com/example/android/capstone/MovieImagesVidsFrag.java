@@ -58,6 +58,7 @@ public class MovieImagesVidsFrag extends Fragment implements onResponce {
         recyclerView = rootView.findViewById(R.id.frag_movie_image_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
+
         VolleyUtils volleyUtils = new VolleyUtils();
         volleyUtils.volleyImageDetailsResults(url,getContext(), this);
 
