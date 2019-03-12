@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"
+        app:layout_constraintTop_toBottomOf="@id/movie_overview_more"
         android:text="@string/cast_list"/>
 
     <android.support.v7.widget.RecyclerView

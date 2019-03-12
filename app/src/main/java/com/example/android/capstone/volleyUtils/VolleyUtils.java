@@ -15,6 +15,7 @@ import com.example.android.capstone.moviemodel.MovieDetailsModel;
 import com.example.android.capstone.moviemodel.MoviePosters;
 import com.example.android.capstone.moviemodel.MovieVideo;
 import com.example.android.capstone.moviemodel.MultiSearch;
+import com.example.android.capstone.moviemodel.ReviewsResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.List;
@@ -111,6 +112,26 @@ public class VolleyUtils {
                 CastMain castMain = gson.fromJson(response, CastMain.class);
                 List list = castMain.getCast();
                 myResponce.onSuccess(list,castMain);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                myResponce.onFail(error.toString());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+    }
+    public void volleyReviewsDetailsResults(String url,Context context, onResponce myResponce){
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                ReviewsResult reviewsResult = gson.fromJson(response, ReviewsResult.class);
+                List list = reviewsResult.getMovieReviews();
+                myResponce.onSuccess(list,reviewsResult);
             }
         }, new Response.ErrorListener() {
             @Override

@@ -59,8 +59,8 @@ public class MovieInfoFrag extends Fragment implements onResponce {
         overViewTv = view.findViewById(R.id.movie_info_overview);
         moreView = view.findViewById(R.id.movie_overview_more);
         overViewTv.setText(overView);
-        int maxLines = 3;
 
+        int maxLines = 3;
         overViewTv.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
@@ -69,27 +69,29 @@ public class MovieInfoFrag extends Fragment implements onResponce {
                     if (overViewTv.getLineCount() > maxLines) {
                         moreView.setVisibility(View.VISIBLE);
                         overViewTv.setMaxLines(maxLines);
-                        moreClicked = true;
+
                     }
+                    moreClicked = true;
                 }
                 return true;
             }
         });
 
         moreView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (moreClicked) {
-                        moreView.setImageResource(R.drawable.ic_expand_less_black_24dp);
-                        overViewTv.setMaxLines(overViewTv.getLineCount());
-                        moreClicked = false;
-                    } else {
-                        moreView.setImageResource(R.drawable.ic_expand_more_black_24dp);
-                        overViewTv.setMaxLines(maxLines);
-                        moreClicked = true;
-                    }
+            @Override
+            public void onClick(View v) {
+                if (moreClicked) {
+                    moreView.setImageResource(R.drawable.ic_expand_less_black_24dp);
+                    overViewTv.setMaxLines(overViewTv.getLineCount());
+                    moreClicked = false;
+                } else {
+                    moreView.setImageResource(R.drawable.ic_expand_more_black_24dp);
+                    overViewTv.setMaxLines(maxLines);
+                    moreClicked = true;
                 }
-            });
+            }
+        });
+
 
         return view;
 
@@ -110,4 +112,10 @@ public class MovieInfoFrag extends Fragment implements onResponce {
     public void onFail(String error) {
 
     }
+
+    public static void showMoreLess(TextView textView, ImageView imageView){
+
+    }
+
+
 }

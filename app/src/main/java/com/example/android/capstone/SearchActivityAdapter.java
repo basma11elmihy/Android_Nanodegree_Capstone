@@ -1,6 +1,7 @@
 package com.example.android.capstone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -81,7 +82,7 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
             notifyDataSetChanged();
         }
     }
-    public class SearchActivityViewHolder extends RecyclerView.ViewHolder{
+    public class SearchActivityViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView imageView;
         private TextView title;
         private TextView subTitle;
@@ -91,6 +92,29 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
             imageView = itemView.findViewById(R.id.card_image);
             title = itemView.findViewById(R.id.card_title);
             subTitle = itemView.findViewById(R.id.card_subtitle);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            SearchResult currentClick = searchResultArrayList.get(position);
+            String id  = String.valueOf(currentClick.getId());
+            Intent intent;
+            if (currentClick.getMediaType() != null) {
+                switch (currentClick.getMediaType()) {
+                    case "movie":
+                        intent = new Intent(context, MovieDetailsActivity.class);
+                        intent.putExtra("extraID", id);
+                        context.startActivity(intent);
+                        break;
+
+                }
+            }else{
+                intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra("extraID", id);
+                context.startActivity(intent);
+            }
         }
     }
 }

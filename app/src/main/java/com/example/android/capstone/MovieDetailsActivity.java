@@ -6,6 +6,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
     private String overView;
     private MovieViewPagerAdapter viewPagerAdapter;
     private Bundle bundle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,9 +140,20 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             viewPagerAdapter.addFragment(imagesVidsFrag,"Images & Videos");
 
 
-            viewPagerAdapter.addFragment(new MovieReviewsFrag(),"Reviews");
-            viewPagerAdapter.addFragment(new MovieSimilarFrag(),"Similar Movies");
-            viewPagerAdapter.addFragment(new MovieRecomFrag(),"Recommendations");
+            MovieReviewsFrag movieReviewsFrag = new MovieReviewsFrag();
+            movieReviewsFrag.setArguments(bundle);
+            viewPagerAdapter.addFragment(movieReviewsFrag,"Reviews");
+
+
+            MovieSimilarFrag movieSimilarFrag = new MovieSimilarFrag();
+            movieSimilarFrag.setArguments(bundle);
+            viewPagerAdapter.addFragment(movieSimilarFrag,"Similar Movies");
+
+
+            MovieRecomFrag movieRecomFrag = new MovieRecomFrag();
+            movieRecomFrag.setArguments(bundle);
+            viewPagerAdapter.addFragment(movieRecomFrag,"Recommendations");
+
             viewPager.setAdapter(viewPagerAdapter);
             tabLayout.setupWithViewPager(viewPager);
         }
