@@ -31,7 +31,8 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setLayout(R.layout.activity_search_results);
+     //   setLayout(R.layout.activity_search_results);
+        setContentView(R.layout.activity_search_results);
         url = getIntent().getStringExtra("url");
         VolleyUtils volleyUtils = new VolleyUtils();
         volleyUtils.volleySimpleResults(url, this, this);
@@ -39,8 +40,8 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        newUrl = url+"&page"+pageNumber;
 
+//find another way
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -49,8 +50,10 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
                 if (!recyclerView.canScrollVertically(1) && pageNumber<totalPages) {
 //                    Toast.makeText(SearchResultsActivity.this, "Last", Toast.LENGTH_LONG).show();
                     //show loading
+                    newUrl = url+"&page="+pageNumber;
                     volleyUtils.volleySimpleResults(newUrl, SearchResultsActivity.this, SearchResultsActivity.this);
-
+                    String number = String.valueOf(pageNumber);
+                    Toast.makeText(SearchResultsActivity.this, number, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -60,6 +63,7 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
     @Override
     public void onSuccess(Object responce, Object multiSearch) {
         multiSearchMain = (MultiSearch) multiSearch;
+        totalPages = multiSearchMain.getTotalPages();
         if (responce != null) {
             try {
                 list = (ArrayList<SearchResult>) responce;
@@ -69,7 +73,6 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
             }
             if (multiSearchMain.getPage() >= 2) {
                 adapter.update(list);
-                totalPages = multiSearchMain.getTotalPages();
                 if (pageNumber < totalPages) {
                     pageNumber++;
                 }

@@ -1,6 +1,11 @@
 package com.example.android.capstone;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -11,9 +16,12 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.android.capstone.Database.FavRoomDatabase;
+import com.example.android.capstone.Database.FavViewModel;
 import com.example.android.capstone.moviemodel.BelongsToCollection;
 import com.example.android.capstone.moviemodel.Genre;
 import com.example.android.capstone.moviemodel.MovieDetailsModel;
+import com.example.android.capstone.moviemodel.SearchResult;
 import com.example.android.capstone.volleyUtils.VolleyUtils;
 import com.example.android.capstone.volleyUtils.onResponce;
 import com.squareup.picasso.Picasso;
@@ -36,6 +44,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
     private String overView;
     private MovieViewPagerAdapter viewPagerAdapter;
     private Bundle bundle;
+    private FavViewModel viewModel;
+    private FavRoomDatabase database;
+    private LiveData<String> roomMovieId;
+    private FloatingActionButton mFab;
+    private String id;
 
 
     @Override
@@ -43,7 +56,10 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        String id = getIntent().getStringExtra("extraID");
+        id = getIntent().getStringExtra("extraID");
+        String title =  getIntent().getStringExtra("extraTitle");
+        String posterPath = getIntent().getStringExtra("extraPath");
+
         String url = getResources().getString(R.string.movie_details_base_url)+ id +
                 getResources().getString(R.string.movie_details_api_url);
         VolleyUtils volleyUtils = new VolleyUtils();
@@ -59,14 +75,56 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         rateTv = findViewById(R.id.movie_rate);
         viewPager = findViewById(R.id.movie_pager);
         tabLayout = findViewById(R.id.tab_layout);
+        mFab = findViewById(R.id.fav_fab);
 
         bundle = new Bundle();
         bundle.putString("extraID",id);
 
+        database = FavRoomDatabase.getDatabase(this.getApplicationContext());
+        viewModel = ViewModelProviders.of(this).get(FavViewModel.class);
+
+        roomMovieId = database.favouriteDao().loadMovieById(id);
+
+        roomMovieId.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+
+                if (s == null) {
+                    mFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                } else if (s.equals(id)) {
+
+                    mFab.setImageResource(R.drawable.ic_favorite_black_24dp);
+                }
+            }
+        });
+        mFab.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final SearchResult favourite = new SearchResult(id,posterPath,title);
+                FavouriteState(favourite);
+            }
+        });
 
 
 
 
+
+    }
+
+    private void FavouriteState(SearchResult favourite) {
+        String value = roomMovieId.getValue();
+        if(value==null)
+        {
+            mFab.setImageResource(R.drawable.ic_favorite_black_24dp);
+            viewModel.insert(favourite);
+
+        }
+        else if (value.equals(id))
+        {
+            mFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            viewModel.delete(favourite);
+        }
     }
 
     @Override

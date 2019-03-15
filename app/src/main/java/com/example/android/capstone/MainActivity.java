@@ -1,27 +1,21 @@
 package com.example.android.capstone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.android.capstone.moviemodel.MultiSearch;
-import com.example.android.capstone.moviemodel.PopularTopRatedMovie;
-import com.example.android.capstone.moviemodel.ResultPopularTopRated;
 import com.example.android.capstone.moviemodel.SearchResult;
 import com.example.android.capstone.volleyUtils.VolleyUtils;
 import com.example.android.capstone.volleyUtils.onMainResponce;
-import com.example.android.capstone.volleyUtils.onResponce;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends CustomAppCompat implements onMainResponce {
     private String url;
@@ -31,6 +25,10 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
     private RecyclerView nowPlayingRV;
     private String topRatedUrl;
     private RecyclerView topRatedRV;
+    private TextView seeAllNowPlaying;
+    private TextView seeAllTopRated;
+    private TextView seeAllPopular;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +51,28 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
         LinearLayoutManager toplayoutManager = new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         topRatedRV.setLayoutManager(toplayoutManager);
 
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.action_movies:
+                        Toast.makeText(MainActivity.this,"main",Toast.LENGTH_LONG).show();
+                        break;
+
+                    case R.id.action_fav:
+                        Intent intent = new Intent(MainActivity.this, FavouritesActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.action_locate:
+                        Toast.makeText(MainActivity.this,"locate",Toast.LENGTH_LONG).show();
+                        break;
+                }
+                return true;
+            }
+        });
+
 
         VolleyUtils volleyUtils = new VolleyUtils();
 
@@ -60,7 +80,30 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
         volleyUtils.volleyMainSimpleResults(nowplayingUrl,this, this,"now");
         volleyUtils.volleyMainSimpleResults(topRatedUrl,this, this,"top");
 
+        seeAllTopRated = findViewById(R.id.movie_seeall_topRated);
+        seeAllPopular = findViewById(R.id.movie_seeall_popular);
 
+        seeAllTopRated.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAllResults(topRatedUrl);
+            }
+        });
+        
+        seeAllPopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAllResults(url);
+            }
+        });
+
+
+    }
+
+    private void goToAllResults(String url) {
+        Intent intent = new Intent(MainActivity.this,SearchResultsActivity.class);
+        intent.putExtra("url", url);
+        startActivity(intent);
     }
 
 
@@ -68,18 +111,21 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
     public void onMainSuccess(Object responce, Object mainResponce, String type) {
         if (responce != null){
             ArrayList<SearchResult> results = (ArrayList<SearchResult>) responce;
-            popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_popuar_movie);
+
             switch (type) {
 
                 case "popular":
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"popular");
                 popularRV.setAdapter(popularAdapter);
                 break;
 
                 case "now":
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"now");
                     nowPlayingRV.setAdapter(popularAdapter);
                     break;
 
                 case "top":
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"top");
                     topRatedRV.setAdapter(popularAdapter);
                     break;
 

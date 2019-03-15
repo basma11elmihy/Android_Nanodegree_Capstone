@@ -12,7 +12,10 @@
         />
     <TextView
         android:id="@+id/movie_popular_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="movie name"/>
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:maxLines="4"
+        android:minLines="4"
+        tools:text="movie name"
+        />
 </LinearLayout>

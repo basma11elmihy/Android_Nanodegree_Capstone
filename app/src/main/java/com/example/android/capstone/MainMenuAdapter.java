@@ -1,6 +1,7 @@
 package com.example.android.capstone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,11 +19,13 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
     private Context context;
     private ArrayList<SearchResult> results;
     private int LayoutResource;
+    private String type;
 
-    public MainMenuAdapter(Context context, ArrayList<SearchResult> results, int layoutResource) {
+    public MainMenuAdapter(Context context, ArrayList<SearchResult> results, int layoutResource,String type) {
         this.context = context;
         this.results = results;
         this.LayoutResource = layoutResource;
+        this.type = type;
     }
 
 
@@ -45,10 +48,20 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-         return results.size();
+        if (results == null)
+            return 0;
+        else if (type.equals("now")){
+            return results.size();
+        }
+        else if (results.size() >= 5)
+            return 5;
+        else if (results.size() >= 1)
+            return results.size();
+        else
+            return 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView movieImage;
         private TextView movieName;
 
@@ -56,6 +69,25 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
             super(itemView);
             movieImage = itemView.findViewById(R.id.movie_popular_image);
             movieName = itemView.findViewById(R.id.movie_popular_text);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            SearchResult currentClick = results.get(position);
+            String id;
+            if (type != "fav") {
+                id = String.valueOf(currentClick.getId());
+            }
+            else{
+                id = String.valueOf(currentClick.getFavId());
+            }
+            Intent intent = new Intent(context, MovieDetailsActivity.class);
+            intent.putExtra("extraID", id);
+            intent.putExtra("extraTitle",currentClick.getTitle());
+            intent.putExtra("extraPath",currentClick.getPosterPath());
+            context.startActivity(intent);
         }
     }
 }

@@ -2,12 +2,19 @@
 package com.example.android.capstone.moviemodel;
 
 import java.util.List;
+
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Entity(tableName = "fav_table")
 public class SearchResult implements Parcelable
 {
 
@@ -19,15 +26,22 @@ public class SearchResult implements Parcelable
     private String mediaType;
     @SerializedName("id")
     @Expose
+    @Ignore
     private int id;
+    @PrimaryKey
+    @ColumnInfo(name = "favId")
+    @NonNull
+    private String favId;
     @SerializedName("profile_path")
     @Expose
+    @Ignore
     private Object profilePath;
     @SerializedName("name")
     @Expose
     private String name;
     @SerializedName("known_for")
     @Expose
+    @Ignore
     private List<KnownFor> knownFor;
     @SerializedName("original_name")
     @Expose
@@ -46,18 +60,23 @@ public class SearchResult implements Parcelable
     private String firstAirDate;
     @SerializedName("genre_ids")
     @Expose
+    @Ignore
     private List<Integer> genreIds = null;
     @SerializedName("original_language")
     @Expose
+    @Ignore
     private String originalLanguage;
     @SerializedName("backdrop_path")
     @Expose
+    @Ignore
     private Object backdropPath;
     @SerializedName("overview")
     @Expose
+    @Ignore
     private String overview;
     @SerializedName("origin_country")
     @Expose
+    @Ignore
     private List<String> originCountry = null;
     @SerializedName("video")
     @Expose
@@ -71,6 +90,8 @@ public class SearchResult implements Parcelable
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
+    @Ignore
     public final static Creator<SearchResult> CREATOR = new Creator<SearchResult>() {
 
 
@@ -88,6 +109,7 @@ public class SearchResult implements Parcelable
     }
     ;
 
+    @Ignore
     protected SearchResult(Parcel in) {
         this.popularity = ((double) in.readValue((double.class.getClassLoader())));
         this.mediaType = ((String) in.readValue((String.class.getClassLoader())));
@@ -112,12 +134,6 @@ public class SearchResult implements Parcelable
         this.releaseDate = ((String) in.readValue((String.class.getClassLoader())));
     }
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public SearchResult() {
-    }
 
     /**
      * 
@@ -143,6 +159,7 @@ public class SearchResult implements Parcelable
      * @param video
      * @param popularity
      */
+    @Ignore
     public SearchResult(double popularity, String mediaType, int id, Object profilePath, String name, List<KnownFor> knownFor, boolean adult, String originalName, int voteCount, double voteAverage, String posterPath, String firstAirDate, List<Integer> genreIds, String originalLanguage, Object backdropPath, String overview, List<String> originCountry, boolean video, String title, String originalTitle, String releaseDate) {
         super();
         this.popularity = popularity;
@@ -165,6 +182,12 @@ public class SearchResult implements Parcelable
         this.title = title;
         this.originalTitle = originalTitle;
         this.releaseDate = releaseDate;
+        this.favId = String.valueOf(id);
+    }
+    public SearchResult(@NonNull String favId, String posterPath, String title){
+        this.favId = favId;
+        this.posterPath = posterPath;
+        this.title = title;
     }
 
     public double getPopularity() {
@@ -427,6 +450,7 @@ public class SearchResult implements Parcelable
         return this;
     }
 
+    @Ignore
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(popularity);
         dest.writeValue(mediaType);
@@ -449,9 +473,17 @@ public class SearchResult implements Parcelable
         dest.writeValue(originalTitle);
         dest.writeValue(releaseDate);
     }
-
+    @Ignore
     public int describeContents() {
         return  0;
     }
 
+    @NonNull
+    public String getFavId() {
+        return favId;
+    }
+
+    public void setFavId(@NonNull String favId) {
+        this.favId = favId;
+    }
 }

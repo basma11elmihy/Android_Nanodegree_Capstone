@@ -22,5 +22,8 @@
     <string name="nowPlaying_url">https://api.themoviedb.org/3/movie/now_playing?api_key=704309e018dc5823efbc0ca4966083d1</string>
     <string name="top_rated_url">https://api.themoviedb.org/3/movie/top_rated?api_key=704309e018dc5823efbc0ca4966083d1</string>
     <string name="see_all">SEE ALL</string>
+    <string name="movies">Movies</string>
+    <string name="favourites">Favourites</string>
+    <string name="cinemas">Cinemas</string>
 
 </resources>

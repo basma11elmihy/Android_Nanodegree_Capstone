@@ -146,7 +146,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:fabCustomSize="50dp"
-        android:src="@drawable/ic_favorite_border_black_24dp"
         app:elevation="6dp"
         android:contentDescription="Favourite"
         />

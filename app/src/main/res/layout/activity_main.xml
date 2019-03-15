@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@drawable/state_menu_item"
+        app:itemTextColor="@drawable/state_menu_item"
+        app:menu="@menu/menu_nav"/>
+
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="30dp"
+    tools:targetApi="lollipop">
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,13 +37,6 @@
         android:layout_height="wrap_content"
         android:text="@string/now_playing"
         app:layout_constraintTop_toBottomOf="@id/main_action_layout"/>
-    <TextView
-        android:id="@+id/movie_seeall_nowPlaying"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_action_layout"
-        android:text="@string/see_all"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movie_now_playing_rv"
         android:layout_width="wrap_content"
@@ -77,12 +88,11 @@
         android:id="@+id/movie_popular_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
         app:layout_constraintTop_toBottomOf="@id/movie_popular"
         app:layout_constraintStart_toStartOf="parent">
     </android.support.v7.widget.RecyclerView>
 
-
+</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>
-</ScrollView>

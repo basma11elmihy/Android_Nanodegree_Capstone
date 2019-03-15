@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_movies"
+        android:enabled="true"
+        android:title="@string/movies"
+        android:icon="@drawable/ic_local_movies_black_24dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_fav"
+        android:enabled="true"
+        android:title="@string/favourites"
+        android:icon="@drawable/ic_favorite_border_black_24dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_locate"
+        android:enabled="true"
+        android:title="@string/cinemas"
+        android:icon="@drawable/ic_location_on_black_24dp"
+        app:showAsAction="ifRoom"/>
+
+
+
+</menu>
