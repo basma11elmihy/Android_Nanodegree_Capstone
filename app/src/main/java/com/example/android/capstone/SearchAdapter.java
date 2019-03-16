@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         if (result.getKnownFor() != null){
             searchViewHolder.title.setText(result.getName());
             Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getProfilePath()).into(searchViewHolder.imageView);
-
             // subtitle known for
             ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
             if (knownFors.size() > 0) {

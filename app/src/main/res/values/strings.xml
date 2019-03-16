@@ -25,5 +25,8 @@
     <string name="movies">Movies</string>
     <string name="favourites">Favourites</string>
     <string name="cinemas">Cinemas</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="tv_shows">Tv Shows</string>
 
 </resources>

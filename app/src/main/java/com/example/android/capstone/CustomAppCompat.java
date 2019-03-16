@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.android.capstone.moviemodel.MultiSearch;
 import com.example.android.capstone.moviemodel.ResultPopularTopRated;
@@ -83,6 +84,7 @@ public class CustomAppCompat extends AppCompatActivity implements onResponce {
             @Override
             public boolean onQueryTextChange(String newText) {
                 Log.d("SimpleSearchView", "Text changed:" + newText);
+
                 if(!newText.equals("")) {
                     String url = SEARCH_URL + newText;
                     VolleyUtils volleyUtils = new VolleyUtils();

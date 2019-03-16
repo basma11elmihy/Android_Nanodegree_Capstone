@@ -29,16 +29,16 @@
 
         <ImageView
             android:id="@+id/movie_review_more"
-            android:layout_width="77dp"
-            android:layout_height="77dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/movie_review_body"
             app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
         <ImageView
             android:id="@+id/movie_review_less"
-            android:layout_width="77dp"
-            android:layout_height="77dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/movie_review_body"
