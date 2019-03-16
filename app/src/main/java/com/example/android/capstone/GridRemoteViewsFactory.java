@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -66,6 +67,9 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.widget_grid_list_item);
+        if (position == 0){
+            views.setViewVisibility(R.id.widget_text_now_playing,0);
+        }
         SearchResult current = mData.get(position);
 
         String name = current.getTitle();
@@ -78,6 +82,12 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String id = String.valueOf(current.getId());
+        Bundle extras = new Bundle();
+        extras.putString("extraID", id);
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+        views.setOnClickFillInIntent(R.id.widget_poster_image, fillInIntent);
 
 
         return views;
@@ -102,4 +112,7 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     public boolean hasStableIds() {
         return true;
     }
+
+
+
 }

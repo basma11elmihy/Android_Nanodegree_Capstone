@@ -2,9 +2,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#09C"
     android:padding="@dimen/widget_margin"
     android:orientation="vertical"
+    android:background="#33000000"
     android:gravity="center|top">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -16,29 +16,30 @@
         android:id="@+id/appwidget_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold|italic"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/movies"/>
 
     <TextView
         android:id="@+id/appwidget_tvShows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:textColor="#ffffff"
         android:textSize="24sp"
         android:textStyle="bold|italic"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/tv_shows"/>
 
     </LinearLayout>
-
     <GridView
         android:id="@+id/widget_grid_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numColumns="auto_fit"
+        android:numColumns="4"
         tools:listitem="@layout/widget_grid_list_item"
 
         />

@@ -4,13 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/widget_text_now_playing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/now_playing"
+        android:layout_marginStart="8dp"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:textStyle="bold|italic"
+        android:layout_gravity="start"
+        android:visibility="invisible"/>
+
     <ImageView
         android:id="@+id/widget_poster_image"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="140dp" />
     <TextView
         android:id="@+id/widget_item_title"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:minLines="2"
+        android:textColor="@color/white"
         />
 </LinearLayout>

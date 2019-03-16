@@ -35,26 +35,20 @@ public class nowPlayingWidget extends AppWidgetProvider {
             views.setRemoteAdapter(R.id.widget_grid_view, ListIntent);
         }
 
+        Intent appIntent = new Intent(context, MovieDetailsActivity.class);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(context, 11,
+                appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setPendingIntentTemplate(R.id.widget_grid_view, appPendingIntent);
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-   //    update(context, appWidgetManager, appWidgetIds,null);
-//        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.now_playing_widget);
-//        Intent intent = new Intent(context,GridIntentService.class);
-//        intent.setAction("getMovies");
-//        PendingIntent pendingIntent = PendingIntent.getService(context,0,intent,0);
-//        views.setOnClickPendingIntent(R.id.appwidget_movies,pendingIntent);
-        ArrayList<SearchResult> searchResults = null;
-        for (int appWidgetId : appWidgetIds) {
-//            GridIntentService.inflateGrid(context);
-            update(context, appWidgetManager, appWidgetIds,searchResults);
-
-       }
-
+        Intent intent = new Intent(context,GridIntentService.class);
+        intent.setAction("getMovies");
+        context.startService(intent);
     }
     public static void update(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, ArrayList<SearchResult> searchResults){
         for (int appWidgetId : appWidgetIds) {
