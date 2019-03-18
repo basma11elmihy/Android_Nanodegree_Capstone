@@ -8,6 +8,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.android.capstone.MapModel.NearByFullModel;
 import com.example.android.capstone.MovieDetailsActivity;
 import com.example.android.capstone.moviemodel.BelongsToCollection;
 import com.example.android.capstone.moviemodel.CastMain;
@@ -158,6 +159,26 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onMainFail(error.toString());
+            }
+        });
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(request);
+    }
+    public void volleyNearByResults(String url, Context context, onResponce myResponce) {
+        StringRequest request = new StringRequest(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                GsonBuilder gsonBuilder = new GsonBuilder();
+                Gson gson = gsonBuilder.create();
+                NearByFullModel nearByFullModel = gson.fromJson(response, NearByFullModel.class);
+                list = nearByFullModel.getResults();
+                myResponce.onSuccess(list,nearByFullModel);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                myResponce.onFail(error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);

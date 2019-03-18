@@ -66,7 +66,9 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
                         break;
 
                     case R.id.action_locate:
-                        Toast.makeText(MainActivity.this,"locate",Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(MainActivity.this,"locate",Toast.LENGTH_LONG).show();
+                        Intent MapIntent = new Intent(MainActivity.this, MapsActivity.class);
+                        startActivity(MapIntent);
                         break;
                 }
                 return true;

@@ -28,5 +28,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="tv_shows">Tv Shows</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="enter_address_city_or_zip_code">Enter Address, City or Zip Code</string>
 
 </resources>
