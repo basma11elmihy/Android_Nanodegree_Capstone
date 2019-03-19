@@ -44,6 +44,7 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -70,6 +71,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private VolleyUtils volleyUtils;
     private ImageView mMorePlaces;
     private Boolean mClearAll = false;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocalMovies = findViewById(R.id.ic_local_movies);
         mMorePlaces = findViewById(R.id.btn_more_cinemas);
         volleyUtils = new VolleyUtils();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
 
         if (isServicesOk()) {
