@@ -39,7 +39,7 @@ public class MovieCastListAdapter extends RecyclerView.Adapter<MovieCastListAdap
         String image = (String) castItem.getProfilePath();
         viewHolder.nameView.setText(name);
         Picasso.with(context)
-                .load("https://image.tmdb.org/t/p/w500"+image)
+                .load(context.getResources().getString(R.string.images_url)+image)
                 .into(viewHolder.imageView);
 
 

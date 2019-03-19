@@ -42,7 +42,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         SearchResult result = results.get(i);
         viewHolder.movieName.setText(result.getTitle());
-        Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getPosterPath()).into(viewHolder.movieImage);
+        Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(viewHolder.movieImage);
 
     }
 
@@ -50,7 +50,7 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
     public int getItemCount() {
         if (results == null)
             return 0;
-        else if (type.equals("now")){
+        else if (type.equals(context.getResources().getString(R.string.now_type))){
             return results.size();
         }
         else if (results.size() >= 5)
@@ -77,16 +77,16 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
             int position = getAdapterPosition();
             SearchResult currentClick = results.get(position);
             String id;
-            if (type != "fav") {
+            if (!type.equals(context.getResources().getString(R.string.fav_type))) {
                 id = String.valueOf(currentClick.getId());
             }
             else{
                 id = String.valueOf(currentClick.getFavId());
             }
             Intent intent = new Intent(context, MovieDetailsActivity.class);
-            intent.putExtra("extraID", id);
-            intent.putExtra("extraTitle",currentClick.getTitle());
-            intent.putExtra("extraPath",currentClick.getPosterPath());
+            intent.putExtra(context.getResources().getString(R.string.extraID), id);
+            intent.putExtra(context.getResources().getString(R.string.extraTitle),currentClick.getTitle());
+            intent.putExtra(context.getResources().getString(R.string.extraPath),currentClick.getPosterPath());
             context.startActivity(intent);
         }
     }

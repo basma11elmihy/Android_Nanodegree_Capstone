@@ -93,7 +93,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(MapsActivity.this);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(MapsActivity.this);
+        }
 
         mGps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA");
+            Places.initialize(getApplicationContext(), getResources().getString(R.string.API_KEY));
         }
 
         // Initialize the AutocompleteSupportFragment.
@@ -139,9 +141,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void getNearByCinemas() {
         if (!mClearAll) {
             if (currentLatLng != null) {
-                UrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" +
+                UrlString = getResources().getString(R.string.NearBySearch_first) +
                         currentLatLng.latitude + "," + currentLatLng.longitude +
-                        "&radius=20000&type=movie_theater&keyword=cinema&key=AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA";
+                        getResources().getString(R.string.NearBySearch_second)+ getResources().getString(R.string.API_KEY);
 
                 volleyUtils.volleyNearByResults(UrlString, MapsActivity.this, MapsActivity.this);
             }
@@ -229,7 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(MapsActivity.this, "Map is ready to use", Toast.LENGTH_LONG).show();
+      //  Toast.makeText(MapsActivity.this, "Map is ready to use", Toast.LENGTH_LONG).show();
         mMap = googleMap;
         if (mLocationPermissionGranted)
             getDeviceLocation();
@@ -293,12 +295,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onFail(String error) {
-
+        Log.e("MapsActivity",error);
     }
 
     private void FindNextResults(String nextPageResult) {
-        UrlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-                "&key=AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA&pagetoken="+nextPageResult;
+        UrlString = getResources().getString(R.string.NextPageMapsUrl_first) +
+               getResources().getString(R.string.API_KEY) + "&pagetoken=" +nextPageResult;
         volleyUtils.volleyNearByResults(UrlString,MapsActivity.this,MapsActivity.this);
     }
 }

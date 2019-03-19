@@ -33,6 +33,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:visibility="gone"
+            android:contentDescription="@string/expand_to_see_more"
             app:layout_constraintStart_toStartOf="@id/movie_review_body"
             app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
         <ImageView
@@ -41,6 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:visibility="gone"
+            android:contentDescription="@string/see_less"
             app:layout_constraintStart_toStartOf="@id/movie_review_body"
             app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
 

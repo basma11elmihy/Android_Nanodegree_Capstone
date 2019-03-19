@@ -1,6 +1,7 @@
 package com.example.android.capstone.volleyUtils;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -23,6 +24,7 @@ import java.util.List;
 
 public class VolleyUtils {
     private List list;
+    private final String TAG = "VOLLEY_ERROR";
 
     public void volleySimpleResults(String url, Context context, onResponce myResponce) {
         StringRequest request = new StringRequest(url, new Response.Listener<String>() {
@@ -39,6 +41,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -60,6 +63,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -79,6 +83,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -99,6 +104,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -119,6 +125,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -139,6 +146,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -159,6 +167,7 @@ public class VolleyUtils {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
                 myResponce.onMainFail(error.toString());
+                Log.e(TAG,error.toString());
             }
         });
         RequestQueue queue = Volley.newRequestQueue(context);
@@ -178,6 +187,7 @@ public class VolleyUtils {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(context, error.toString(), Toast.LENGTH_LONG).show();
+                Log.e(TAG,error.toString());
                 myResponce.onFail(error.toString());
             }
         });

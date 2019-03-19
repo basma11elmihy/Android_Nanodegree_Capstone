@@ -33,12 +33,14 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     }
 
     public void initData(){
-        String stringData = String.valueOf(intent.getData().getSchemeSpecificPart());
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-        SearchResult[] results = gson.fromJson(stringData, SearchResult[].class);
-        mData = new ArrayList<>(Arrays.asList(results));
-        ids = intent.getIntArrayExtra("ids");
+        if (intent.getData() != null) {
+            String stringData = String.valueOf(intent.getData().getSchemeSpecificPart());
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+            SearchResult[] results = gson.fromJson(stringData, SearchResult[].class);
+            mData = new ArrayList<>(Arrays.asList(results));
+            ids = intent.getIntArrayExtra(context.getResources().getString(R.string.ids_extra));
+        }
 
     }
 
@@ -77,14 +79,14 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
 
        //Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+current.getPosterPath()).into(views,R.id.widget_poster_image,ids);
         try {
-            Bitmap bitmap = Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+current.getPosterPath()).get();
+            Bitmap bitmap = Picasso.with(context).load(context.getResources().getString(R.string.images_url)+current.getPosterPath()).get();
             views.setImageViewBitmap(R.id.widget_poster_image,bitmap);
         } catch (IOException e) {
             e.printStackTrace();
         }
         String id = String.valueOf(current.getId());
         Bundle extras = new Bundle();
-        extras.putString("extraID", id);
+        extras.putString(context.getResources().getString(R.string.extraID), id);
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
         views.setOnClickFillInIntent(R.id.widget_poster_image, fillInIntent);

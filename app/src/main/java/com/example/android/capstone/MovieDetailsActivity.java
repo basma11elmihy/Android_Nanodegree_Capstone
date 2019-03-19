@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
@@ -56,9 +57,9 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
 
-        id = getIntent().getStringExtra("extraID");
-        String title =  getIntent().getStringExtra("extraTitle");
-        String posterPath = getIntent().getStringExtra("extraPath");
+        id = getIntent().getStringExtra(getResources().getString(R.string.extraID));
+        String title =  getIntent().getStringExtra(getResources().getString(R.string.extraTitle));
+        String posterPath = getIntent().getStringExtra(getResources().getString(R.string.extraPath));
 
         String url = getResources().getString(R.string.movie_details_base_url)+ id +
                 getResources().getString(R.string.movie_details_api_url);
@@ -78,7 +79,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         mFab = findViewById(R.id.fav_fab);
 
         bundle = new Bundle();
-        bundle.putString("extraID",id);
+        bundle.putString(getResources().getString(R.string.extraID),id);
 
         database = FavRoomDatabase.getDatabase(this.getApplicationContext());
         viewModel = ViewModelProviders.of(this).get(FavViewModel.class);
@@ -141,21 +142,21 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             }
             String coverPathtwo = model.getBackdropPath();
             if (coverPathtwo != null) {
-                Picasso.with(MovieDetailsActivity.this).load("https://image.tmdb.org/t/p/w500" + coverPathtwo).into(mCoverPhoto);
+                Picasso.with(MovieDetailsActivity.this).load(getResources().getString(R.string.images_url) + coverPathtwo).into(mCoverPhoto);
             }
             else {
                 if (coverPath != null)
-                Picasso.with(MovieDetailsActivity.this).load("https://image.tmdb.org/t/p/w500" + coverPath).into(mCoverPhoto);
+                Picasso.with(MovieDetailsActivity.this).load(getResources().getString(R.string.images_url) + coverPath).into(mCoverPhoto);
             }
 
 
             String posterPathtwo = model.getPosterPath();
             if (posterPathtwo != null) {
-                Picasso.with(MovieDetailsActivity.this).load("https://image.tmdb.org/t/p/w500" + posterPathtwo).into(mMainPhoto);
+                Picasso.with(MovieDetailsActivity.this).load(getResources().getString(R.string.images_url) + posterPathtwo).into(mMainPhoto);
             }
             else{
                 if (mainPath != null)
-                Picasso.with(MovieDetailsActivity.this).load("https://image.tmdb.org/t/p/w500" + mainPath).into(mMainPhoto);
+                Picasso.with(MovieDetailsActivity.this).load(getResources().getString(R.string.images_url) + mainPath).into(mMainPhoto);
             }
 
             String movieTitle = model.getTitle();
@@ -188,29 +189,29 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
 
             viewPagerAdapter = new MovieViewPagerAdapter(getSupportFragmentManager());
 
-            bundle.putString("overview",overView);
+            bundle.putString(getResources().getString(R.string.overview_detail),overView);
             MovieInfoFrag movieInfoFrag = new MovieInfoFrag();
             movieInfoFrag.setArguments(bundle);
-            viewPagerAdapter.addFragment(movieInfoFrag,"Info");
+            viewPagerAdapter.addFragment(movieInfoFrag,getResources().getString(R.string.Info_frag));
 
             MovieImagesVidsFrag imagesVidsFrag = new MovieImagesVidsFrag();
             imagesVidsFrag.setArguments(bundle);
-            viewPagerAdapter.addFragment(imagesVidsFrag,"Images & Videos");
+            viewPagerAdapter.addFragment(imagesVidsFrag,getResources().getString(R.string.Images_Videos_frag));
 
 
             MovieReviewsFrag movieReviewsFrag = new MovieReviewsFrag();
             movieReviewsFrag.setArguments(bundle);
-            viewPagerAdapter.addFragment(movieReviewsFrag,"Reviews");
+            viewPagerAdapter.addFragment(movieReviewsFrag,getResources().getString(R.string.Reviews_frag));
 
 
             MovieSimilarFrag movieSimilarFrag = new MovieSimilarFrag();
             movieSimilarFrag.setArguments(bundle);
-            viewPagerAdapter.addFragment(movieSimilarFrag,"Similar Movies");
+            viewPagerAdapter.addFragment(movieSimilarFrag,getResources().getString(R.string.Similar_Movies_frag));
 
 
             MovieRecomFrag movieRecomFrag = new MovieRecomFrag();
             movieRecomFrag.setArguments(bundle);
-            viewPagerAdapter.addFragment(movieRecomFrag,"Recommendations");
+            viewPagerAdapter.addFragment(movieRecomFrag,getResources().getString(R.string.Recommendations_frag));
 
             viewPager.setAdapter(viewPagerAdapter);
             tabLayout.setupWithViewPager(viewPager);
@@ -219,6 +220,6 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
 
     @Override
     public void onFail(String error) {
-
+        Log.e("MovieDetailsActivity",error);
     }
 }

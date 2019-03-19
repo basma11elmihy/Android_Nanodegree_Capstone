@@ -19,7 +19,8 @@
     <ImageView
         android:id="@+id/widget_poster_image"
         android:layout_width="100dp"
-        android:layout_height="140dp" />
+        android:layout_height="140dp"
+        android:contentDescription="@string/movie_poster"/>
     <TextView
         android:id="@+id/widget_item_title"
         android:layout_width="100dp"

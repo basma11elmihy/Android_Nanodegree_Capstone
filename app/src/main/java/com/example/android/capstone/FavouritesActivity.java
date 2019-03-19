@@ -29,7 +29,8 @@ public class FavouritesActivity extends CustomAppCompat {
         viewModel.getAllMovies().observe(this, new Observer<List<SearchResult>>() {
             @Override
             public void onChanged(@Nullable List<SearchResult> favourites) {
-                adapter = new MainMenuAdapter(FavouritesActivity.this, (ArrayList<SearchResult>) favourites,R.layout.list_item_movie,"fav");
+                adapter = new MainMenuAdapter(FavouritesActivity.this, (ArrayList<SearchResult>)
+                        favourites,R.layout.list_item_movie,getResources().getString(R.string.fav_type));
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

@@ -40,7 +40,7 @@ public class MovieImageDetailAdapter extends RecyclerView.Adapter<MovieImageDeta
         if (backdropsUrls != null){
             backdrop = backdropsUrls.get(i);
             backdropUrl = backdrop.getFilePath();
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+backdropUrl).into(imageDetailViewHolder.mBackdropView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+backdropUrl).into(imageDetailViewHolder.mBackdropView);
         }
 
 

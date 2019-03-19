@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SearchResultsActivity">
 
-    <!--<include-->
-        <!--android:id="@+id/layoutBar"-->
-        <!--layout="@layout/activity_custom_app_compat"/>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_cardView"
         android:layout_width="match_parent"

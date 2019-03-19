@@ -145,7 +145,7 @@
         android:layout_height="50dp"
         app:fabCustomSize="50dp"
         app:elevation="6dp"
-        android:contentDescription="Favourite"
+        android:contentDescription="@string/add_to_favourites"
         />
 
 </android.support.design.widget.CoordinatorLayout>

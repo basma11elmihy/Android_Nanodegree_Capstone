@@ -25,7 +25,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 app:popupTheme="@style/ThemeOverlay.AppCompat"
-                app:title="Example" />
+                app:title="@string/app_name"
+                android:contentDescription="@string/search_toolbar"/>
 
             <com.ferfalk.simplesearchview.SimpleSearchView
                 android:id="@+id/searchView"

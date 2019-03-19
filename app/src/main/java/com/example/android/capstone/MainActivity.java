@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -78,9 +79,9 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
 
         VolleyUtils volleyUtils = new VolleyUtils();
 
-        volleyUtils.volleyMainSimpleResults(url,this, this,"popular");
-        volleyUtils.volleyMainSimpleResults(nowplayingUrl,this, this,"now");
-        volleyUtils.volleyMainSimpleResults(topRatedUrl,this, this,"top");
+        volleyUtils.volleyMainSimpleResults(url,this, this,getResources().getString(R.string.popular_type));
+        volleyUtils.volleyMainSimpleResults(nowplayingUrl,this, this,getResources().getString(R.string.now_type));
+        volleyUtils.volleyMainSimpleResults(topRatedUrl,this, this,getResources().getString(R.string.top_type));
 
         seeAllTopRated = findViewById(R.id.movie_seeall_topRated);
         seeAllPopular = findViewById(R.id.movie_seeall_popular);
@@ -104,7 +105,7 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
 
     private void goToAllResults(String url) {
         Intent intent = new Intent(MainActivity.this,SearchResultsActivity.class);
-        intent.putExtra("url", url);
+        intent.putExtra(getResources().getString(R.string.url_extra), url);
         startActivity(intent);
     }
 
@@ -117,17 +118,17 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
             switch (type) {
 
                 case "popular":
-                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"popular");
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,getResources().getString(R.string.popular_type));
                 popularRV.setAdapter(popularAdapter);
                 break;
 
                 case "now":
-                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"now");
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,getResources().getString(R.string.now_type));
                     nowPlayingRV.setAdapter(popularAdapter);
                     break;
 
                 case "top":
-                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,"top");
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,getResources().getString(R.string.top_type));
                     topRatedRV.setAdapter(popularAdapter);
                     break;
 
@@ -137,6 +138,6 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
 
     @Override
     public void onMainFail(String error) {
-
+        Log.e("MainActivity",error);
     }
 }

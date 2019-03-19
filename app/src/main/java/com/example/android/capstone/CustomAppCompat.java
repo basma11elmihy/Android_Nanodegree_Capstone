@@ -27,10 +27,11 @@ import java.util.ArrayList;
 public class CustomAppCompat extends AppCompatActivity implements onResponce {
     Toolbar toolbar;
     SimpleSearchView searchView;
-    private String SEARCH_URL = "https://api.themoviedb.org/3/search/multi?api_key=704309e018dc5823efbc0ca4966083d1&query=";
+    private String SEARCH_URL;
     ArrayList<SearchResult> list;
     private RecyclerView recyclerView;
     private SearchAdapter searchAdapter;
+    private final String TAG = "CustomAppCompat";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class CustomAppCompat extends AppCompatActivity implements onResponce {
         recyclerView = findViewById(R.id.search_rv);
         LinearLayoutManager layoutManager = new LinearLayoutManager(CustomAppCompat.this);
         recyclerView.setLayoutManager(layoutManager);
+        SEARCH_URL = getResources().getString(R.string.search_url);
         searchView.setOnSearchViewListener(new SimpleSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
@@ -74,11 +76,13 @@ public class CustomAppCompat extends AppCompatActivity implements onResponce {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d("SimpleSearchView", "Submit:" + query);
-               //send url w 5las :D
-                Intent intent = new Intent(CustomAppCompat.this,SearchResultsActivity.class);
-                intent.putExtra("url",SEARCH_URL+query);
-                startActivity(intent);
-                return false;
+                if (SEARCH_URL != null) {
+                    Intent intent = new Intent(CustomAppCompat.this, SearchResultsActivity.class);
+                    intent.putExtra(getResources().getString(R.string.url_extra), SEARCH_URL + query);
+                    startActivity(intent);
+                }
+                    return false;
+
             }
 
             @Override
@@ -124,6 +128,6 @@ public class CustomAppCompat extends AppCompatActivity implements onResponce {
 
     @Override
     public void onFail(String error) {
-
+        Log.e(TAG,error);
     }
 }

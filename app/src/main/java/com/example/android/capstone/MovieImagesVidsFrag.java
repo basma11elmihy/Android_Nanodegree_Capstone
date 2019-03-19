@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class MovieImagesVidsFrag extends Fragment implements onResponce {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_movie_images_vids, container, false);
         if (getArguments() != null) {
-            id = getArguments().getString("extraID");
+            id = getArguments().getString(getContext().getResources().getString(R.string.extraID));
             url = getContext().getResources().getString(R.string.movie_details_base_url)+id +
                     getContext().getResources().getString(R.string.image_url) +
                     getContext().getResources().getString(R.string.movie_details_api_url);
@@ -99,6 +100,6 @@ public class MovieImagesVidsFrag extends Fragment implements onResponce {
 
     @Override
     public void onFail(String error) {
-
+        Log.e("MovieImagesVidsFrag",error);
     }
 }

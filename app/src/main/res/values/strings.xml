@@ -30,5 +30,39 @@
     <string name="tv_shows">Tv Shows</string>
     <string name="title_activity_maps">Map</string>
     <string name="enter_address_city_or_zip_code">Enter Address, City or Zip Code</string>
+    <string name="search_toolbar">Search Toolbar</string>
+    <string name="add_more_nearby_cinemas_to_the_map">Add more nearby cinemas to the map</string>
+    <string name="show_your_location">Show your location</string>
+    <string name="show_near_by_cinemas">Show near by cinemas</string>
+    <string name="add_to_favourites">Add to favourites</string>
+    <string name="expand_to_see_more">Expand to see more</string>
+    <string name="see_less">See less</string>
+    <string name="actor_picture">Actor Picture</string>
+    <string name="back_drop_image_for_movie">back drop image for movie</string>
+    <string name="movie_poster">movie poster</string>
+    <string name="icon_image">icon image</string>
+    <string name="video_thumbnail">Video thumbnail</string>
+    <string name="search_url">https://api.themoviedb.org/3/search/multi?api_key=704309e018dc5823efbc0ca4966083d1&amp;query=</string>
+    <string name="url_extra">url</string>
+    <string name="fav_type">fav</string>
+    <string name="getMovies_action">getMovies</string>
+    <string name="ids_extra">ids</string>
+    <string name="extraID">extraID</string>
+    <string name="images_url">https://image.tmdb.org/t/p/w500</string>
+    <string name="popular_type">popular</string>
+    <string name="now_type">now</string>
+    <string name="top_type">top</string>
+    <string name="extraTitle">extraTitle</string>
+    <string name="extraPath">extraPath</string>
+    <string name="API_KEY">AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA</string>
+    <string name="NearBySearch_first">https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=</string>
+    <string name="NearBySearch_second">&amp;radius=20000&amp;type=movie_theater&amp;keyword=cinema&amp;key=</string>
+    <string name="NextPageMapsUrl_first">https://maps.googleapis.com/maps/api/place/nearbysearch/json?&amp;key=</string>
+    <string name="overview_detail">overview</string>
+    <string name="Info_frag">Info</string>
+    <string name="Images_Videos_frag">Images &amp; Videos</string>
+    <string name="Reviews_frag">Reviews</string>
+    <string name="Similar_Movies_frag">Similar Movies</string>
+    <string name="Recommendations_frag">Recommendations</string>
 
 </resources>

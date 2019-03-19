@@ -11,34 +11,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
  />
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_marginStart="10dp"-->
-        <!--android:layout_marginEnd="10dp"-->
-        <!--android:layout_marginTop="10dp"-->
-        <!--android:elevation="10dp"-->
-        <!--android:background="@drawable/white_border"-->
-        <!--android:id="@+id/SearchBar_layout">-->
-        <!--<ImageView-->
-            <!--android:id="@+id/ic_search"-->
-            <!--android:layout_width="15dp"-->
-            <!--android:layout_height="15dp"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_marginStart="10dp"-->
-            <!--android:src="@drawable/ic_search_black_24dp"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/input_search"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_toEndOf="@id/ic_search"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:textSize="15sp"-->
-            <!--android:hint="@string/enter_address_city_or_zip_code"-->
-            <!--android:imeOptions="actionSearch"-->
-            <!--/>-->
-    <!--</RelativeLayout>-->
     <fragment
         android:id="@+id/autocomplete_fragment"
         android:layout_width="match_parent"
@@ -55,6 +27,7 @@
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:background="@drawable/ic_gps_fixed_black_24dp"
+        android:contentDescription="@string/show_your_location"
         android:id="@+id/ic_gps"/>
 
     <ImageView
@@ -66,6 +39,7 @@
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"
         android:background="@drawable/ic_local_movies_black_24dp"
+        android:contentDescription="@string/show_near_by_cinemas"
         android:id="@+id/ic_local_movies"/>
     <ImageView
         android:id="@+id/btn_more_cinemas"
@@ -74,6 +48,7 @@
         android:src="@drawable/ic_add_location_black_24dp"
         android:layout_toEndOf="@id/ic_local_movies"
         android:layout_below="@id/autocomplete_fragment"
+        android:contentDescription="@string/add_more_nearby_cinemas_to_the_map"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:scaleType="centerCrop"

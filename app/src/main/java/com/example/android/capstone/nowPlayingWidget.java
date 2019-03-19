@@ -23,7 +23,7 @@ public class nowPlayingWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.now_playing_widget);
         Intent intent = new Intent(context,GridIntentService.class);
-        intent.setAction("getMovies");
+        intent.setAction(context.getResources().getString(R.string.getMovies_action));
         PendingIntent pendingIntent = PendingIntent.getService(context,0,intent,0);
         views.setOnClickPendingIntent(R.id.appwidget_movies,pendingIntent);
 
@@ -47,7 +47,7 @@ public class nowPlayingWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Intent intent = new Intent(context,GridIntentService.class);
-        intent.setAction("getMovies");
+        intent.setAction(context.getResources().getString(R.string.getMovies_action));
         context.startService(intent);
     }
     public static void update(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, ArrayList<SearchResult> searchResults){

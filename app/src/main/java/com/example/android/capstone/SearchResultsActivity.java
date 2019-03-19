@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
         super.onCreate(savedInstanceState);
      //   setLayout(R.layout.activity_search_results);
         setContentView(R.layout.activity_search_results);
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra(getResources().getString(R.string.url_extra));
         VolleyUtils volleyUtils = new VolleyUtils();
         volleyUtils.volleySimpleResults(url, this, this);
         recyclerView = findViewById(R.id.search_cardView);
@@ -87,6 +88,6 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
 
     @Override
     public void onFail(String error) {
-        super.onFail(error);
+        Log.e("SearchResultsActivity",error);
     }
 }

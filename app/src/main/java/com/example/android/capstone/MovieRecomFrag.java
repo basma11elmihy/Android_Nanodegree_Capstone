@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class MovieRecomFrag extends Fragment implements onResponce {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movie_recom, container, false);
         if (getArguments() != null) {
-            id = getArguments().getString("extraID");
+            id = getArguments().getString(getContext().getResources().getString(R.string.extraID));
             url = getContext().getResources().getString(R.string.movie_details_base_url)+ id +
                     getContext().getResources().getString(R.string.recomm) +
                     getContext().getResources().getString(R.string.movie_details_api_url);
@@ -63,6 +64,6 @@ public class MovieRecomFrag extends Fragment implements onResponce {
 
     @Override
     public void onFail(String error) {
-
+        Log.e("MovieRecomFrag",error);
     }
 }

@@ -41,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
          result = results.get(i);
         if (result.getKnownFor() != null){
             searchViewHolder.title.setText(result.getName());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getProfilePath()).into(searchViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchViewHolder.imageView);
             // subtitle known for
             ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
             if (knownFors.size() > 0) {
@@ -52,13 +52,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         else if (result.getOriginalName() != null){
             searchViewHolder.title.setText(result.getName());
             searchViewHolder.subTitle.setText(result.getFirstAirDate());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getPosterPath()).into(searchViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchViewHolder.imageView);
 
         }
         else if (result.getTitle() != null){
             searchViewHolder.title.setText(result.getTitle());
             searchViewHolder.subTitle.setText(result.getReleaseDate());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getPosterPath()).into(searchViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchViewHolder.imageView);
         }
 
 
@@ -98,7 +98,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             switch (currentClick.getMediaType()){
                 case "movie":
                     intent = new Intent(context,MovieDetailsActivity.class);
-                    intent.putExtra("extraID",id);
+                    intent.putExtra(context.getResources().getString(R.string.extraID),id);
                     context.startActivity(intent);
                     break;
 

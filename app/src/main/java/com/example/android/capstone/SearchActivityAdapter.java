@@ -45,7 +45,7 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
 
         if (result.getKnownFor() != null){
             searchActivityViewHolder.title.setText(result.getName());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getProfilePath()).into(searchActivityViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchActivityViewHolder.imageView);
 
             // subtitle known for
 
@@ -58,13 +58,13 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
         else if (result.getOriginalName() != null){
             searchActivityViewHolder.title.setText(result.getName());
             searchActivityViewHolder.subTitle.setText(result.getFirstAirDate());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getPosterPath()).into(searchActivityViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchActivityViewHolder.imageView);
 
         }
         else if (result.getTitle() != null){
             searchActivityViewHolder.title.setText(result.getTitle());
             searchActivityViewHolder.subTitle.setText(result.getReleaseDate());
-            Picasso.with(context).load("https://image.tmdb.org/t/p/w500"+result.getPosterPath()).into(searchActivityViewHolder.imageView);
+            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchActivityViewHolder.imageView);
         }
 
     }
@@ -105,14 +105,14 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
                 switch (currentClick.getMediaType()) {
                     case "movie":
                         intent = new Intent(context, MovieDetailsActivity.class);
-                        intent.putExtra("extraID", id);
+                        intent.putExtra(context.getResources().getString(R.string.extraID), id);
                         context.startActivity(intent);
                         break;
 
                 }
             }else{
                 intent = new Intent(context, MovieDetailsActivity.class);
-                intent.putExtra("extraID", id);
+                intent.putExtra(context.getResources().getString(R.string.extraID), id);
                 context.startActivity(intent);
             }
         }
