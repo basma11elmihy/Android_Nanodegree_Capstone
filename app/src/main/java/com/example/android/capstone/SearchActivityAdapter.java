@@ -18,6 +18,8 @@ import com.example.android.capstone.volleyUtils.VolleyUtils;
 import com.example.android.capstone.volleyUtils.onResponce;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAdapter.SearchActivityViewHolder> {
@@ -64,6 +66,7 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
         else if (result.getTitle() != null){
             searchActivityViewHolder.title.setText(result.getTitle());
             searchActivityViewHolder.subTitle.setText(result.getReleaseDate());
+            searchActivityViewHolder.rate.setText(String.valueOf(result.getVoteAverage()));
             Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchActivityViewHolder.imageView);
         }
 
@@ -86,12 +89,14 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
         private ImageView imageView;
         private TextView title;
         private TextView subTitle;
+        private TextView rate;
 
         public SearchActivityViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.card_image);
             title = itemView.findViewById(R.id.card_title);
             subTitle = itemView.findViewById(R.id.card_subtitle);
+            rate = itemView.findViewById(R.id.movie_rate_card);
             itemView.setOnClickListener(this);
         }
 

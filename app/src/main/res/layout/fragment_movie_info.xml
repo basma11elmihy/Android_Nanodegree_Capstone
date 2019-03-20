@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MovieInfoFrag"
+    tools:context=".MovieInfoFrag">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
    >
 
     <TextView
@@ -12,14 +16,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/overview"
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_marginStart="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:textColor="@color/white"/>
     <TextView
         android:id="@+id/movie_info_overview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textColor="@color/secondaryTextLight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/overview_movie_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:paddingBottom="8dp"
         tools:text="@string/this_is_the_overview"/>
    <ImageView
        android:id="@+id/movie_overview_more"
@@ -30,7 +44,9 @@
        android:visibility="gone"
        android:contentDescription="@string/expand_to_see_more"
        app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/movie_info_overview"/>
+       android:layout_margin="8dp"
+       app:layout_constraintTop_toBottomOf="@id/movie_info_overview"
+       app:layout_constraintBottom_toTopOf="@id/movie_info_cast_title"/>
     <ImageView
         android:id="@+id/movie_overview_less"
         android:layout_width="30dp"
@@ -40,11 +56,16 @@
         android:visibility="gone"
         android:contentDescription="@string/see_less"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"/>
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/movie_info_overview"
+        app:layout_constraintBottom_toTopOf="@id/movie_info_cast_title"/>
     <TextView
         android:id="@+id/movie_info_cast_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_marginStart="8dp"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/movie_overview_more"
@@ -53,8 +74,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movie_castlist_rv"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:background="@color/colorAccent"
+        android:layout_height="350dp"
         app:layout_constraintTop_toBottomOf="@id/movie_info_cast_title"
         app:layout_constraintStart_toStartOf="parent">
     </android.support.v7.widget.RecyclerView>
@@ -62,3 +82,4 @@
 
 
 </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

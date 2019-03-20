@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone</string>
+    <string name="app_name">Movie Night</string>
     <string name="api_key">704309e018dc5823efbc0ca4966083d1</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="movie_details_base_url">https://api.themoviedb.org/3/movie/</string>

@@ -9,42 +9,55 @@
     android:background="#000"
     app:cardUseCompatPadding="true">
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/movie_review_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            tools:text="author name"/>
+            tools:text="author name"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:paddingStart="8dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            />
 
         <TextView
             android:id="@+id/movie_review_body"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="body reviews"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_review_author"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            app:layout_constraintTop_toBottomOf="@id/movie_review_author"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
             android:id="@+id/movie_review_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@color/colorAccent"
             android:visibility="gone"
+            android:layout_margin="16dp"
             android:contentDescription="@string/expand_to_see_more"
-            app:layout_constraintStart_toStartOf="@id/movie_review_body"
-            app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
+            app:layout_constraintTop_toBottomOf="@id/movie_review_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
         <ImageView
             android:id="@+id/movie_review_less"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@color/colorAccent"
             android:visibility="gone"
+            android:layout_margin="16dp"
             android:contentDescription="@string/see_less"
-            app:layout_constraintStart_toStartOf="@id/movie_review_body"
-            app:layout_constraintTop_toBottomOf="@id/movie_review_body"/>
+            app:layout_constraintTop_toBottomOf="@id/movie_review_body"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+          />
 
 
     </android.support.constraint.ConstraintLayout>

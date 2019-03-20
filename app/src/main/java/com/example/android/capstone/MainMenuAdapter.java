@@ -43,6 +43,10 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
         SearchResult result = results.get(i);
         viewHolder.movieName.setText(result.getTitle());
         Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(viewHolder.movieImage);
+        if (LayoutResource == R.layout.list_item_popular){
+            viewHolder.runTime.setText(result.getReleaseDate());
+            viewHolder.rate.setText(String.valueOf(result.getVoteAverage()));
+        }
 
     }
 
@@ -64,12 +68,22 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView movieImage;
         private TextView movieName;
+        private TextView runTime;
+        private TextView rate;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            movieImage = itemView.findViewById(R.id.movie_popular_image);
-            movieName = itemView.findViewById(R.id.movie_popular_text);
+            if (LayoutResource == R.layout.list_item_popular){
+            movieImage = itemView.findViewById(R.id.movie_popular_image_card);
+            movieName = itemView.findViewById(R.id.movie_popular_text_card);
+            runTime = itemView.findViewById(R.id.movie_popular_time);
+            rate = itemView.findViewById(R.id.movie_rate_card);
+            } else{
+                movieImage = itemView.findViewById(R.id.movie_popular_image);
+                movieName = itemView.findViewById(R.id.movie_popular_text);
+            }
             itemView.setOnClickListener(this);
+
         }
 
         @Override

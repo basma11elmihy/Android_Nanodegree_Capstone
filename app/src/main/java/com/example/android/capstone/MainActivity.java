@@ -118,7 +118,7 @@ public class MainActivity extends CustomAppCompat implements onMainResponce {
             switch (type) {
 
                 case "popular":
-                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_movie,getResources().getString(R.string.popular_type));
+                    popularAdapter = new MainMenuAdapter(this, results, R.layout.list_item_popular,getResources().getString(R.string.popular_type));
                 popularRV.setAdapter(popularAdapter);
                 break;
 

@@ -50,12 +50,8 @@ public class MovieImageDetailAdapter extends RecyclerView.Adapter<MovieImageDeta
     public int getItemCount() {
         if (backdropsUrls== null)
             return 0;
-        else if (backdropsUrls.size() >= 5)
-            return 5;
-        else if (backdropsUrls.size() >= 1)
-            return backdropsUrls.size();
         else
-            return 0;
+            return backdropsUrls.size();
     }
 
     public class ImageDetailViewHolder extends RecyclerView.ViewHolder{

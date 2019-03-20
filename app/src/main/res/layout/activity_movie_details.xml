@@ -12,7 +12,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="#000"
+        android:background="@color/black"
         >
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -50,35 +50,40 @@
                     />
                 <TextView
                     android:id="@+id/movie_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="title"
                     android:layout_marginTop="2dp"
                     android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     app:layout_constraintStart_toEndOf="@id/main_photo"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
                 <TextView
                     android:id="@+id/movie_runtime"
                     app:layout_constraintTop_toBottomOf="@id/movie_title"
                     app:layout_constraintStart_toEndOf="@id/main_photo"
                     android:text="run time"
-                    android:textColor="@color/white"
+                    android:textColor="@color/secondaryTextLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/genres"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
                     app:layout_constraintStart_toEndOf="@id/main_photo"
+                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="5dp"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/movie_runtime"
                    tools:text="genres"/>
                 <TextView
                     android:id="@+id/movie_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/secondaryTextLight"
                     tools:text="year"
                     app:layout_constraintStart_toEndOf="@id/main_photo"
                     app:layout_constraintTop_toBottomOf="@id/genres"/>
@@ -105,16 +110,6 @@
 
             </android.support.constraint.ConstraintLayout>
 
-
-
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="parallax"
-                app:contentInsetStart="48dp"
-                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
