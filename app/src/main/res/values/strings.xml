@@ -64,5 +64,7 @@
     <string name="Reviews_frag">Reviews</string>
     <string name="Similar_Movies_frag">Similar Movies</string>
     <string name="Recommendations_frag">Recommendations</string>
+    <string name="dialog_title">You are Offline</string>
+    <string name="dialog_message">Oops! There is no Internet connection, Please check your connection and try again.</string>
 
 </resources>

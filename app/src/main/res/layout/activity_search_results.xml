@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
 
-        android:background="@color/colorPrimary"
+        android:background="@color/LightGrey"
         app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

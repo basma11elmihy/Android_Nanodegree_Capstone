@@ -103,7 +103,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getDeviceLocation();
             }
         });
-        hideSoftKeyboard();
 
         mLocalMovies.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -255,10 +254,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(MapsActivity.this,"Please make sure you have the latest google play services installed on your device",Toast.LENGTH_LONG).show();
         }
         return false;
-    }
-
-    private void hideSoftKeyboard(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override

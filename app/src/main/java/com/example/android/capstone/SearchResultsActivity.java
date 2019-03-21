@@ -79,7 +79,7 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
                 }
             }
             else{
-                adapter = new SearchActivityAdapter(this,list);
+                adapter = new SearchActivityAdapter(this,list,1);
                 recyclerView.setAdapter(adapter);
             }
 

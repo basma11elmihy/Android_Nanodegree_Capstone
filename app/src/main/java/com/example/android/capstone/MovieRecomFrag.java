@@ -56,7 +56,7 @@ public class MovieRecomFrag extends Fragment implements onResponce {
     public void onSuccess(Object responce, Object mainResponce) {
         if (responce != null){
             ArrayList<SearchResult> list = (ArrayList<SearchResult>) responce;
-            adapter = new SearchActivityAdapter(getContext(),list);
+            adapter = new SearchActivityAdapter(getContext(),list,0);
             recyclerView.setAdapter(adapter);
         }
 
