@@ -37,7 +37,6 @@
             android:label="@string/title_activity_search_results"
             android:theme="@style/AppTheme" />
         <activity android:name=".MovieDetailsActivity" />
-        <activity android:name=".FavouritesActivity" />
 
         <receiver android:name=".nowPlayingWidget">
             <intent-filter>
@@ -58,9 +57,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,20 @@
     android:background="@color/DarkerGrey"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/main_action_layout"
+        layout="@layout/activity_custom_app_compat"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_action_layout"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav"/>
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
@@ -19,105 +33,6 @@
         app:itemIconTint="@drawable/state_menu_item"
         app:itemTextColor="@drawable/state_menu_item"
         app:menu="@menu/menu_nav"
-        android:elevation="10dp"/>
-
-<android.support.v4.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="38dp"
-    >
-<android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <include
-        android:id="@+id/main_action_layout"
-        layout="@layout/activity_custom_app_compat"
-     />
-    <TextView
-        android:id="@+id/movie_now_playing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:textStyle="bold"
-        android:text="@string/now_playing"
-        app:layout_constraintTop_toBottomOf="@id/main_action_layout"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_now_playing_rv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/movie_now_playing"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/movie_top_rated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/top_rated"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:paddingStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/movie_now_playing_rv"
-        app:layout_constraintStart_toStartOf="parent"
         />
-
-    <TextView
-        android:id="@+id/movie_seeall_topRated"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:text="@string/see_all"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/movie_top_rated"
-        app:layout_constraintEnd_toEndOf="parent" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_top_rated_rv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/movie_top_rated"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v7.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/movie_popular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:text="@string/popular"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/movie_seeall_popular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_top_rated_rv" />
-
-    <TextView
-        android:id="@+id/movie_seeall_popular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:text="@string/see_all"
-        android:textStyle="bold"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/movie_top_rated_rv" />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_popular_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/movie_popular"
-        app:layout_constraintStart_toStartOf="parent">
-    </android.support.v7.widget.RecyclerView>
-
-</android.support.constraint.ConstraintLayout>
-</android.support.v4.widget.NestedScrollView>
 
 </android.support.constraint.ConstraintLayout>

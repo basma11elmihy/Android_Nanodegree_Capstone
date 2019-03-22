@@ -2,25 +2,20 @@ package com.example.android.capstone;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.media.Image;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.capstone.MapModel.Geometry;
@@ -46,15 +41,13 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+
 //found help from these tutorials playlist: https://www.youtube.com/playlist?list=PLgCYzUzKIBE-vInwQhGSdnbyJ62nixHCt
 //found help with nearby places from google developers documentation
 //https://developers.google.com/places/web-service/search#PlaceSearchRequests
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, onResponce {
-
+public class MapsFragment extends Fragment  implements OnMapReadyCallback, onResponce {
     private GoogleMap mMap;
     int ERROR_DIALOG_REQUEST = 9001;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -73,28 +66,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Boolean mClearAll = false;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    public MapsFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        mGps = findViewById(R.id.ic_gps);
-        mLocalMovies = findViewById(R.id.ic_local_movies);
-        mMorePlaces = findViewById(R.id.btn_more_cinemas);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+        mGps = view.findViewById(R.id.ic_gps);
+        mLocalMovies = view.findViewById(R.id.ic_local_movies);
+        mMorePlaces = view.findViewById(R.id.btn_more_cinemas);
         volleyUtils = new VolleyUtils();
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
 
         if (isServicesOk()) {
             getLocationPermission();
         }
+        return view;
     }
 
     private void initMap() {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
-            mapFragment.getMapAsync(MapsActivity.this);
+            mapFragment.getMapAsync(this);
         }
 
         mGps.setOnClickListener(new View.OnClickListener() {
@@ -112,12 +112,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), getResources().getString(R.string.API_KEY));
+            Places.initialize(getContext().getApplicationContext(), getResources().getString(R.string.API_KEY));
         }
 
         // Initialize the AutocompleteSupportFragment.
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+                getChildFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
         if (autocompleteFragment != null) {
             autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
@@ -131,7 +131,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 @Override
                 public void onError(Status status) {
                     Log.i("TAG", "An error occurred: " + status);
-                    Toast.makeText(MapsActivity.this,"An error occurred, please try again.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"An error occurred, please try again.",Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -144,7 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         currentLatLng.latitude + "," + currentLatLng.longitude +
                         getResources().getString(R.string.NearBySearch_second)+ getResources().getString(R.string.API_KEY);
 
-                volleyUtils.volleyNearByResults(UrlString, MapsActivity.this, MapsActivity.this);
+                volleyUtils.volleyNearByResults(UrlString, getContext(), this);
             }
         }
         else
@@ -160,27 +160,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            if (ContextCompat.checkSelfPermission(this.getApplicationContext(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getContext().getApplicationContext(), FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getContext().getApplicationContext(), COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionGranted = true;
                 initMap();
             } else {
-                ActivityCompat.requestPermissions(this, permissions, LOCATION_REQUEST_CODE);
+                ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_REQUEST_CODE);
             }
         } else {
-            ActivityCompat.requestPermissions(this, permissions, LOCATION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(getActivity(), permissions, LOCATION_REQUEST_CODE);
         }
     }
 
     private void getDeviceLocation() {
-        mLocationClient = LocationServices.getFusedLocationProviderClient(MapsActivity.this);
+        mLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         try {
             if (mLocationPermissionGranted) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                        ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     return;
                 }
                 mLocationClient.getLastLocation()
-                        .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                             @Override
                             public void onSuccess(Location location) {
                                 // Got last known location. In some rare situations this can be null.
@@ -188,7 +189,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                                     moveCamera(currentLatLng, DEFAULT_ZOOM, "You're Here!");
                                 } else {
-                                    Toast.makeText(MapsActivity.this, "Unable to locate current location," +
+                                    Toast.makeText(getActivity(), "Unable to locate current location," +
                                             " Please make sure that the location is activated in your settings.", Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -201,7 +202,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void moveCamera(LatLng latLng, float zoom, String line) {
         if (!line.equals("You're Here!"))
-        mMap.addMarker(new MarkerOptions().position(latLng).title(line));
+            mMap.addMarker(new MarkerOptions().position(latLng).title(line));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -214,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (int i = 0; i < grantResults.length; i++) {
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionGranted = false;
-                            Toast.makeText(MapsActivity.this, "Please grant the requested permissions so the app can work correctly", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Please grant the requested permissions so the app can work correctly", Toast.LENGTH_LONG).show();
                             return;
                         }
                     }
@@ -230,11 +231,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-      //  Toast.makeText(MapsActivity.this, "Map is ready to use", Toast.LENGTH_LONG).show();
+        //  Toast.makeText(MapsActivity.this, "Map is ready to use", Toast.LENGTH_LONG).show();
         mMap = googleMap;
         if (mLocationPermissionGranted)
             getDeviceLocation();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -242,16 +244,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public boolean isServicesOk(){
-        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MapsActivity.this);
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(getContext());
         if (available == ConnectionResult.SUCCESS){
             return true;
         }
         else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){
-            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MapsActivity.this,available,ERROR_DIALOG_REQUEST);
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(getActivity(),available,ERROR_DIALOG_REQUEST);
             dialog.show();
         }
         else {
-            Toast.makeText(MapsActivity.this,"Please make sure you have the latest google play services installed on your device",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"Please make sure you have the latest google play services installed on your device",Toast.LENGTH_LONG).show();
         }
         return false;
     }
@@ -266,7 +268,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             com.example.android.capstone.MapModel.Location location = geometry.getLocation();
             LatLng latLng = new LatLng(location.getLat(),location.getLng());
             mMap.addMarker(new MarkerOptions().position(latLng).title(result.getName()));
-            }
+        }
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, NEAR_BY_ZOOM));
         String nextPageResult = nearByFullModel.getNextPageToken();
         if (nextPageResult != null) {
@@ -295,7 +297,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void FindNextResults(String nextPageResult) {
         UrlString = getResources().getString(R.string.NextPageMapsUrl_first) +
-               getResources().getString(R.string.API_KEY) + "&pagetoken=" +nextPageResult;
-        volleyUtils.volleyNearByResults(UrlString,MapsActivity.this,MapsActivity.this);
+                getResources().getString(R.string.API_KEY) + "&pagetoken=" +nextPageResult;
+        volleyUtils.volleyNearByResults(UrlString,getContext(),this);
     }
+
+
 }
