@@ -5,13 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SearchResultsActivity">
+    <include
+        android:id="@+id/detail_action_layout"
+        layout="@layout/activity_custom_app_compat"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/detail_action_layout"
         android:layout_marginBottom="100dp"
-
         android:background="@color/LightGrey"
         app:layout_constraintStart_toStartOf="parent"/>
 

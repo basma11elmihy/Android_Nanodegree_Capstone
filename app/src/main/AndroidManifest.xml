@@ -35,8 +35,20 @@
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/title_activity_search_results"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".MovieDetailsActivity" />
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".MovieDetailsActivity"
+            android:parentActivityName=".MainActivity"
+           >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
 
         <receiver android:name=".nowPlayingWidget">
             <intent-filter>

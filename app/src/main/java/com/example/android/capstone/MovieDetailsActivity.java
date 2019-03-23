@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +51,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
     private LiveData<String> roomMovieId;
     private FloatingActionButton mFab;
     private String id;
+    private ImageView backBtn;
 
 
     @Override
@@ -77,6 +79,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         viewPager = findViewById(R.id.movie_pager);
         tabLayout = findViewById(R.id.tab_layout);
         mFab = findViewById(R.id.fav_fab);
+        backBtn = findViewById(R.id.back_arrow);
 
         bundle = new Bundle();
         bundle.putString(getResources().getString(R.string.extraID),id);
@@ -104,6 +107,12 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             public void onClick(View v) {
                 final SearchResult favourite = new SearchResult(id,posterPath,title);
                 FavouriteState(favourite);
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavUtils.navigateUpFromSameTask(MovieDetailsActivity.this);
             }
         });
 

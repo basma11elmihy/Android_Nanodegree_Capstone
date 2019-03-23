@@ -18,6 +18,7 @@
         android:id="@+id/cast_item_pic"
         android:layout_width="150dp"
         android:layout_height="200dp"
+        android:elevation="8dp"
         android:contentDescription="@string/actor_picture"/>
     <TextView
         android:id="@+id/cast_item_name"

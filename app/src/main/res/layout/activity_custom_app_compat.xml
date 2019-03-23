@@ -29,6 +29,7 @@
                 app:title="@string/app_name"
                 android:background="@color/colorPrimary"
                 app:titleTextColor="@color/white"
+                android:theme="@style/ToolbarTheme"
                 android:contentDescription="@string/search_toolbar"/>
 
             <com.ferfalk.simplesearchview.SimpleSearchView
