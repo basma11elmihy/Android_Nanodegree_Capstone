@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,20 +29,45 @@ import java.util.ArrayList;
 public class MainActivity extends CustomAppCompat {
 
     private BottomNavigationView bottomNavigationView;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setLayout(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottom_nav);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sharedPreferences.edit();
         start();
 
     }
     private void start() {
         if (checkInternetConnection()) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container,new MoviesFragment())
-                    .commit();
+            if (sharedPreferences.getString("state","movies").equals("movies")) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new MoviesFragment())
+                        .commitAllowingStateLoss();
+                editor.putString("state","movies");
+                editor.apply();
+            }
+            else if (sharedPreferences.getString("state","movies").equals("map")){
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, new MapsFragment())
+                            .commit();
+                    editor.putString("state","map");
+                    editor.apply();
+                }
+            else if (sharedPreferences.getString("state","movies").equals("fav"))  {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new FavFragment())
+                        .commit();
+                editor.putString("state","fav");
+                editor.apply();
+            }
+
+            }
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -50,6 +77,8 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new MoviesFragment())
                                     .commit();
+                            editor.putString("state","movies");
+                            editor.apply();
 
                             break;
 
@@ -57,6 +86,8 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new FavFragment())
                                     .commit();
+                            editor.putString("state","fav");
+                            editor.apply();
                             break;
 
                         case R.id.action_locate:
@@ -64,6 +95,8 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new MapsFragment())
                                     .commit();
+                            editor.putString("state","map");
+                            editor.apply();
                             break;
                     }
                     return true;
@@ -73,7 +106,7 @@ public class MainActivity extends CustomAppCompat {
 
 
         }
-    }
+
     private boolean checkInternetConnection () {
         ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
@@ -102,6 +135,8 @@ public class MainActivity extends CustomAppCompat {
         }
         return false;
     }
+
+
 }
 
 

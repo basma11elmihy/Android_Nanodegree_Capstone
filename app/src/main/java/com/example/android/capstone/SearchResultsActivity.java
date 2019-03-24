@@ -88,11 +88,19 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pageNumber = 1;
                 NavUtils.navigateUpFromSameTask(this);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        pageNumber = 1;
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     @Override

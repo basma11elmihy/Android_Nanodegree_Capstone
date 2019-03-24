@@ -50,6 +50,8 @@ public class MoviesFragment extends Fragment implements onMainResponce {
         // Required empty public constructor
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,24 +113,25 @@ public class MoviesFragment extends Fragment implements onMainResponce {
         public void onMainSuccess (Object responce, Object mainResponce, String type){
             if (responce != null) {
                 ArrayList<SearchResult> results = (ArrayList<SearchResult>) responce;
+                if (getContext() != null) {
+                    switch (type) {
 
-                switch (type) {
+                        case "popular":
+                            popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_popular, getResources().getString(R.string.popular_type));
+                            popularRV.setAdapter(popularAdapter);
+                            break;
 
-                    case "popular":
-                        popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_popular, getResources().getString(R.string.popular_type));
-                        popularRV.setAdapter(popularAdapter);
-                        break;
+                        case "now":
+                            popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_movie, getResources().getString(R.string.now_type));
+                            nowPlayingRV.setAdapter(popularAdapter);
+                            break;
 
-                    case "now":
-                        popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_movie, getResources().getString(R.string.now_type));
-                        nowPlayingRV.setAdapter(popularAdapter);
-                        break;
+                        case "top":
+                            popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_movie, getResources().getString(R.string.top_type));
+                            topRatedRV.setAdapter(popularAdapter);
+                            break;
 
-                    case "top":
-                        popularAdapter = new MainMenuAdapter(getContext(), results, R.layout.list_item_movie, getResources().getString(R.string.top_type));
-                        topRatedRV.setAdapter(popularAdapter);
-                        break;
-
+                    }
                 }
             }
         }

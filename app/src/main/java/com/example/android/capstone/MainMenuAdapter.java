@@ -54,7 +54,8 @@ public class MainMenuAdapter extends RecyclerView.Adapter<MainMenuAdapter.ViewHo
     public int getItemCount() {
         if (results == null)
             return 0;
-        else if (type.equals(context.getResources().getString(R.string.now_type))){
+        else if (type.equals(context.getResources().getString(R.string.now_type))
+                ||type.equals(context.getResources().getString(R.string.fav_type))){
             return results.size();
         }
         else if (results.size() >= 5)

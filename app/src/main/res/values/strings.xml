@@ -42,7 +42,7 @@
     <string name="movie_poster">movie poster</string>
     <string name="icon_image">icon image</string>
     <string name="video_thumbnail">Video thumbnail</string>
-    <string name="search_url">https://api.themoviedb.org/3/search/multi?api_key=704309e018dc5823efbc0ca4966083d1&amp;query=</string>
+    <string name="search_url">https://api.themoviedb.org/3/search/movie?api_key=704309e018dc5823efbc0ca4966083d1&amp;query=</string>
     <string name="url_extra">url</string>
     <string name="fav_type">fav</string>
     <string name="getMovies_action">getMovies</string>

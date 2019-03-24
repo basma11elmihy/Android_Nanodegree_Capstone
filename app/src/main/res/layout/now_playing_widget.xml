@@ -21,18 +21,18 @@
         android:textStyle="bold|italic"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/movies"/>
+        android:text="@string/now_playing"/>
 
-    <TextView
-        android:id="@+id/appwidget_tvShows"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold|italic"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/tv_shows"/>
+    <!--<TextView-->
+        <!--android:id="@+id/appwidget_tvShows"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:textSize="24sp"-->
+        <!--android:textStyle="bold|italic"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:text="@string/tv_shows"/>-->
 
     </LinearLayout>
     <GridView

@@ -54,25 +54,26 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
             searchActivityViewHolder.rate.setTextColor(context.getResources().getColor(R.color.white));
         }
 
-        if (result.getKnownFor() != null){
-            searchActivityViewHolder.title.setText(result.getName());
-            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchActivityViewHolder.imageView);
-
-            // subtitle known for
-
-            ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
-            if (knownFors.size() > 0) {
-                String knownForString = knownFors.get(0).getTitle() + " (" + knownFors.get(0).getReleaseDate() + ")";
-                searchActivityViewHolder.subTitle.setText(knownForString);
-            }
-        }
-        else if (result.getOriginalName() != null){
-            searchActivityViewHolder.title.setText(result.getName());
-            searchActivityViewHolder.subTitle.setText(result.getFirstAirDate());
-            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchActivityViewHolder.imageView);
-
-        }
-        else if (result.getTitle() != null){
+//        if (result.getKnownFor() != null){
+//            searchActivityViewHolder.title.setText(result.getName());
+//            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchActivityViewHolder.imageView);
+//
+//            // subtitle known for
+//
+//            ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
+//            if (knownFors.size() > 0) {
+//                String knownForString = knownFors.get(0).getTitle() + " (" + knownFors.get(0).getReleaseDate() + ")";
+//                searchActivityViewHolder.subTitle.setText(knownForString);
+//            }
+//        }
+//        else if (result.getOriginalName() != null){
+//            searchActivityViewHolder.title.setText(result.getName());
+//            searchActivityViewHolder.subTitle.setText(result.getFirstAirDate());
+//            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchActivityViewHolder.imageView);
+//
+//        }
+//        else
+            if (result.getTitle() != null){
             searchActivityViewHolder.title.setText(result.getTitle());
             searchActivityViewHolder.subTitle.setText(result.getReleaseDate());
             searchActivityViewHolder.rate.setText(String.valueOf(result.getVoteAverage()));
@@ -117,20 +118,22 @@ public class SearchActivityAdapter extends RecyclerView.Adapter<SearchActivityAd
             SearchResult currentClick = searchResultArrayList.get(position);
             String id  = String.valueOf(currentClick.getId());
             Intent intent;
-            if (currentClick.getMediaType() != null) {
-                switch (currentClick.getMediaType()) {
-                    case "movie":
-                        intent = new Intent(context, MovieDetailsActivity.class);
-                        intent.putExtra(context.getResources().getString(R.string.extraID), id);
-                        context.startActivity(intent);
-                        break;
-
-                }
-            }else{
+//            if (currentClick.getMediaType() != null) {
+//                switch (currentClick.getMediaType()) {
+//                    case "movie":
+//                        intent = new Intent(context, MovieDetailsActivity.class);
+//                        intent.putExtra(context.getResources().getString(R.string.extraID), id);
+//                        context.startActivity(intent);
+//                        break;
+//
+//                }
+//            }else{
                 intent = new Intent(context, MovieDetailsActivity.class);
                 intent.putExtra(context.getResources().getString(R.string.extraID), id);
+                intent.putExtra(context.getResources().getString(R.string.extraTitle),currentClick.getTitle());
+                intent.putExtra(context.getResources().getString(R.string.extraPath),currentClick.getPosterPath());
                 context.startActivity(intent);
-            }
+           // }
         }
     }
 }

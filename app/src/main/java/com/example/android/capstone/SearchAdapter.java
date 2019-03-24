@@ -39,23 +39,23 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder searchViewHolder, int i) {
          result = results.get(i);
-        if (result.getKnownFor() != null){
-            searchViewHolder.title.setText(result.getName());
-            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchViewHolder.imageView);
-            // subtitle known for
-            ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
-            if (knownFors.size() > 0) {
-                String knownForString = knownFors.get(0).getTitle() + " (" + knownFors.get(0).getReleaseDate() + ")";
-                searchViewHolder.subTitle.setText(knownForString);
-            }
-        }
-        else if (result.getOriginalName() != null){
-            searchViewHolder.title.setText(result.getName());
-            searchViewHolder.subTitle.setText(result.getFirstAirDate());
-            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchViewHolder.imageView);
+//        if (result.getKnownFor() != null){
+//            searchViewHolder.title.setText(result.getName());
+//            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getProfilePath()).into(searchViewHolder.imageView);
+//            // subtitle known for
+//            ArrayList<KnownFor> knownFors = (ArrayList<KnownFor>) result.getKnownFor();
+//            if (knownFors.size() > 0) {
+//                String knownForString = knownFors.get(0).getTitle() + " (" + knownFors.get(0).getReleaseDate() + ")";
+//                searchViewHolder.subTitle.setText(knownForString);
+//            }
+//        }
+//        else if (result.getOriginalName() != null){
+//            searchViewHolder.title.setText(result.getName());
+//            searchViewHolder.subTitle.setText(result.getFirstAirDate());
+//            Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchViewHolder.imageView);
 
-        }
-        else if (result.getTitle() != null){
+       // }
+         if (result.getTitle() != null){
             searchViewHolder.title.setText(result.getTitle());
             searchViewHolder.subTitle.setText(result.getReleaseDate());
             Picasso.with(context).load(context.getResources().getString(R.string.images_url)+result.getPosterPath()).into(searchViewHolder.imageView);
@@ -95,14 +95,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             SearchResult currentClick = results.get(position);
             String id  = String.valueOf(currentClick.getId());
             Intent intent;
-            switch (currentClick.getMediaType()){
-                case "movie":
+//            switch (currentClick.getMediaType()){
+//                case "movie":
                     intent = new Intent(context,MovieDetailsActivity.class);
                     intent.putExtra(context.getResources().getString(R.string.extraID),id);
+                    intent.putExtra(context.getResources().getString(R.string.extraTitle),currentClick.getTitle());
+                    intent.putExtra(context.getResources().getString(R.string.extraPath),currentClick.getPosterPath());
                     context.startActivity(intent);
-                    break;
+                //    break;
 
-            }
+          //  }
         }
     }
 }

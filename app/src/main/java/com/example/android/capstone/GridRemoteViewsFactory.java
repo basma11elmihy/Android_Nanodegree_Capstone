@@ -69,9 +69,9 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews views = new RemoteViews(context.getPackageName(),R.layout.widget_grid_list_item);
-        if (position == 0){
-            views.setViewVisibility(R.id.widget_text_now_playing,0);
-        }
+//        if (position == 0){
+//            views.setViewVisibility(R.id.widget_text_now_playing,0);
+//        }
         SearchResult current = mData.get(position);
 
         String name = current.getTitle();
