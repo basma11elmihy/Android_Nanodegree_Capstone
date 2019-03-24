@@ -45,25 +45,25 @@ public class MainActivity extends CustomAppCompat {
     }
     private void start() {
         if (checkInternetConnection()) {
-            if (sharedPreferences.getString("state","movies").equals("movies")) {
+            if (sharedPreferences.getString(getResources().getString(R.string.state),getResources().getString(R.string.movies_key)).equals(getResources().getString(R.string.movies_key))) {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new MoviesFragment())
                         .commitAllowingStateLoss();
-                editor.putString("state","movies");
+                editor.putString(getResources().getString(R.string.state),getResources().getString(R.string.movies_key));
                 editor.apply();
             }
-            else if (sharedPreferences.getString("state","movies").equals("map")){
+            else if (sharedPreferences.getString((getResources().getString(R.string.state)),getResources().getString(R.string.movies_key)).equals(getResources().getString(R.string.map))){
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, new MapsFragment())
                             .commit();
-                    editor.putString("state","map");
+                    editor.putString(getResources().getString(R.string.state),getResources().getString(R.string.map));
                     editor.apply();
                 }
-            else if (sharedPreferences.getString("state","movies").equals("fav"))  {
+            else if (sharedPreferences.getString((getResources().getString(R.string.state)),getResources().getString(R.string.movies_key)).equals(getResources().getString(R.string.fav_type)))  {
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, new FavFragment())
                         .commit();
-                editor.putString("state","fav");
+                editor.putString((getResources().getString(R.string.state)),getResources().getString(R.string.fav_type));
                 editor.apply();
             }
 
@@ -77,7 +77,7 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new MoviesFragment())
                                     .commit();
-                            editor.putString("state","movies");
+                            editor.putString((getResources().getString(R.string.state)),getResources().getString(R.string.movies_key));
                             editor.apply();
 
                             break;
@@ -86,7 +86,7 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new FavFragment())
                                     .commit();
-                            editor.putString("state","fav");
+                            editor.putString((getResources().getString(R.string.state)),getResources().getString(R.string.fav_type));
                             editor.apply();
                             break;
 
@@ -95,7 +95,7 @@ public class MainActivity extends CustomAppCompat {
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_container, new MapsFragment())
                                     .commit();
-                            editor.putString("state","map");
+                            editor.putString((getResources().getString(R.string.state)),getResources().getString(R.string.map));
                             editor.apply();
                             break;
                     }

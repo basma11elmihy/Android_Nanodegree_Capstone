@@ -66,12 +66,12 @@
     <string name="Recommendations_frag">Recommendations</string>
     <string name="dialog_title">You are Offline</string>
     <string name="dialog_message">Oops! There is no Internet connection, Please check your connection and try again.</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rate">rate</string>
     <string name="cover_photo">cover photo</string>
     <string name="previous_page">previous page</string>
     <string name="movie_profile_photo">movie profile photo</string>
+    <string name="state">state</string>
+    <string name="movies_key">movies</string>
+    <string name="map">map</string>
 
 </resources>
