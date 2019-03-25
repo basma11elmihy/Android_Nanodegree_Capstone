@@ -1,20 +1,30 @@
 package com.example.android.capstone;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Build;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +37,7 @@ import com.example.android.capstone.moviemodel.SearchResult;
 import com.example.android.capstone.volleyUtils.VolleyUtils;
 import com.example.android.capstone.volleyUtils.onResponce;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
@@ -52,12 +63,21 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
     private FloatingActionButton mFab;
     private String id;
     private ImageView backBtn;
+    private AppBarLayout appBarLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_movie_details);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            getWindow().setEnterTransition(new Fade());
+            getWindow().setExitTransition(new Slide(Gravity.BOTTOM));
+            getWindow().setAllowEnterTransitionOverlap(true);
+        }
 
         id = getIntent().getStringExtra(getResources().getString(R.string.extraID));
         String title =  getIntent().getStringExtra(getResources().getString(R.string.extraTitle));
@@ -80,6 +100,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
         tabLayout = findViewById(R.id.tab_layout);
         mFab = findViewById(R.id.fav_fab);
         backBtn = findViewById(R.id.back_arrow);
+        appBarLayout = findViewById(R.id.app_bar);
 
         bundle = new Bundle();
         bundle.putString(getResources().getString(R.string.extraID),id);
@@ -113,14 +134,11 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             @Override
             public void onClick(View v) {
                 NavUtils.navigateUpFromSameTask(MovieDetailsActivity.this);
+                finish();
             }
         });
-
-
-
-
-
     }
+
 
     private void FavouriteState(SearchResult favourite) {
         String value = roomMovieId.getValue();
@@ -136,6 +154,7 @@ public class MovieDetailsActivity extends AppCompatActivity implements onResponc
             viewModel.delete(favourite);
         }
     }
+
 
     @Override
     public void onSuccess(Object responce, Object mainResponce) {

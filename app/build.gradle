@@ -4,7 +4,7 @@ android {
         config {
             keyAlias 'capstone'
             keyPassword 'udacity2019'
-            storeFile file('D:/MyAndroidApps/Capstone/keystore.jks')
+            storeFile file('../keystore.jks')
             storePassword 'udacity2019'
         }
     }
@@ -61,6 +61,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.libraries.places:places:1.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.8'
+
+
     implementation 'com.android.support:multidex:1.0.3'
+
 }
 apply plugin: 'com.google.gms.google-services'

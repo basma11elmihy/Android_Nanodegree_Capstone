@@ -112,7 +112,7 @@ public class MapsFragment extends Fragment  implements OnMapReadyCallback, onRes
         });
 
         if (!Places.isInitialized()) {
-            Places.initialize(getContext().getApplicationContext(), getResources().getString(R.string.API_KEY));
+            Places.initialize(getContext().getApplicationContext(), getResources().getString(R.string.GOOGLE_PLAY_API_KEY));
         }
 
         // Initialize the AutocompleteSupportFragment.
@@ -125,7 +125,11 @@ public class MapsFragment extends Fragment  implements OnMapReadyCallback, onRes
                 @Override
                 public void onPlaceSelected(@NonNull Place place) {
                     Log.i("TAG", "Place: " + place.getName() + ", " + place.getId());
+                    if (place.getLatLng() != null && place.getName() != null)
                     moveCamera(place.getLatLng(),DEFAULT_ZOOM,place.getName());
+                    else {
+                        Log.e("PLACES_TAG","An error occurred in places");
+                    }
                 }
 
                 @Override
@@ -142,7 +146,7 @@ public class MapsFragment extends Fragment  implements OnMapReadyCallback, onRes
             if (currentLatLng != null) {
                 UrlString = getResources().getString(R.string.NearBySearch_first) +
                         currentLatLng.latitude + "," + currentLatLng.longitude +
-                        getResources().getString(R.string.NearBySearch_second)+ getResources().getString(R.string.API_KEY);
+                        getResources().getString(R.string.NearBySearch_second)+ getResources().getString(R.string.GOOGLE_PLAY_API_KEY);
 
                 volleyUtils.volleyNearByResults(UrlString, getContext(), this);
             }
@@ -297,7 +301,7 @@ public class MapsFragment extends Fragment  implements OnMapReadyCallback, onRes
 
     private void FindNextResults(String nextPageResult) {
         UrlString = getResources().getString(R.string.NextPageMapsUrl_first) +
-                getResources().getString(R.string.API_KEY) + "&pagetoken=" +nextPageResult;
+                getResources().getString(R.string.GOOGLE_PLAY_API_KEY) + "&pagetoken=" +nextPageResult;
         volleyUtils.volleyNearByResults(UrlString,getContext(),this);
     }
 

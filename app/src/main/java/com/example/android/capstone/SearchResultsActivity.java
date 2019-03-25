@@ -1,5 +1,6 @@
 package com.example.android.capstone;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -9,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -37,6 +41,12 @@ public class SearchResultsActivity extends CustomAppCompat implements onResponce
         super.onCreate(savedInstanceState);
         setLayout(R.layout.activity_search_results);
    //     setContentView(R.layout.activity_search_results);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            getWindow().setEnterTransition(new Fade());
+            getWindow().setExitTransition(new Slide(Gravity.BOTTOM));
+            getWindow().setAllowEnterTransitionOverlap(true);
+        }
         url = getIntent().getStringExtra(getResources().getString(R.string.url_extra));
         VolleyUtils volleyUtils = new VolleyUtils();
         volleyUtils.volleySimpleResults(url, this, this);

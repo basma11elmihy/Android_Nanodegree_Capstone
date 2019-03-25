@@ -87,6 +87,8 @@ public class GridRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
         String id = String.valueOf(current.getId());
         Bundle extras = new Bundle();
         extras.putString(context.getResources().getString(R.string.extraID), id);
+        extras.putString(context.getResources().getString(R.string.extraTitle),current.getTitle());
+        extras.putString(context.getResources().getString(R.string.extraPath),current.getPosterPath());
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
         views.setOnClickFillInIntent(R.id.widget_poster_image, fillInIntent);
