@@ -70,6 +70,7 @@ public class MainActivity extends CustomAppCompat {
                             .commit();
                     editor.putString(getResources().getString(R.string.state),getResources().getString(R.string.map));
                     editor.apply();
+                findViewById(R.id.main_action_layout).setVisibility(View.GONE);
                 }
             else if (sharedPreferences.getString((getResources().getString(R.string.state)),getResources().getString(R.string.movies_key)).equals(getResources().getString(R.string.fav_type)))  {
                 getSupportFragmentManager().beginTransaction()
@@ -83,6 +84,7 @@ public class MainActivity extends CustomAppCompat {
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    findViewById(R.id.main_action_layout).setVisibility(View.VISIBLE);
                     switch (menuItem.getItemId()) {
                         case R.id.action_movies:
                             //  Toast.makeText(MainActivity.this, "main", Toast.LENGTH_LONG).show();
@@ -109,6 +111,7 @@ public class MainActivity extends CustomAppCompat {
                                     .commit();
                             editor.putString((getResources().getString(R.string.state)),getResources().getString(R.string.map));
                             editor.apply();
+                            findViewById(R.id.main_action_layout).setVisibility(View.GONE);
                             break;
                     }
                     return true;

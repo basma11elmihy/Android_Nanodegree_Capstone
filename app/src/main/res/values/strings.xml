@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Movie Night</string>
+    <!--// TODO: Please Provide Your Own Movie Database API Key to use my app-->
     <string name="movies_database_api_key"></string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="movie_details_base_url">https://api.themoviedb.org/3/movie/</string>
@@ -54,7 +55,8 @@
     <string name="top_type">top</string>
     <string name="extraTitle">extraTitle</string>
     <string name="extraPath">extraPath</string>
-    <string name="GOOGLE_PLAY_API_KEY">AIzaSyC97nMpETrLaMBqQKyXlYSvW-cECS5BBQA</string>
+    <!--// TODO: Please Provide Your Own GOOGLE API Key to use my app-->
+    <string name="GOOGLE_PLAY_API_KEY"></string>
     <string name="NearBySearch_first">https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=</string>
     <string name="NearBySearch_second">&amp;radius=20000&amp;type=movie_theater&amp;keyword=cinema&amp;key=</string>
     <string name="NextPageMapsUrl_first">https://maps.googleapis.com/maps/api/place/nearbysearch/json?&amp;key=</string>

@@ -29,7 +29,8 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBzAlq_mCvl7Chk1Pa2P8F2EVYwjmsfa7U"
+          // TODO: Please Provide Your Own Key to use my app
+          "current_key": ""
         }
       ],
       "services": {
